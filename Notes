@@ -1,0 +1,4 @@
+will need:
+NodeJS
+
+npm install express cors mongodb
