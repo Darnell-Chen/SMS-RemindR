@@ -2,3 +2,7 @@ will need:
 NodeJS
 
 npm install express cors mongodb
+
+or just "npm install" since it's all in package.json
+
+
