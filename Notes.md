@@ -1,8 +1,9 @@
+
+# Dependencies
 will need:
 NodeJS
 
-npm install express cors mongodb nodemon
-
+```npm install express cors mongodb nodemon```
 
 ***nodemon is used to run server after ctrl + s
 
