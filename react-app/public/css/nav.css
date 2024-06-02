@@ -1,0 +1,53 @@
+:root {
+    --baseGreen: rgb(96, 221, 87);
+    --baseGreen2: rgb(27, 41, 27);
+}
+
+body {
+    background-color: var(--baseGreen);
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.26);
+}
+
+.navbar span{
+    color: white;
+    font-weight: bold;
+    padding-left: 5vw;
+    font-style: italic;
+    font-size: 3vh;
+}
+
+.introDiv {
+    text-align: left;
+    justify-content: center;
+}
+
+.introDiv .left-side {
+    border-right: 2.5px solid white;
+}
+
+.introDiv .right-side {
+    text-align: center;
+    color: white;
+}
+
+.introSection {
+    box-sizing: border-box;
+    padding: 15vh 5vh 15vh 5vh;
+}
+
+.introSection h1 {
+    color: white;
+}
+
+.introSection p {
+    font-size: 2.5vh;
+    color: white;
+}
+
+.second-section {
+    background-color: white;
+    padding: 5vh 5vh 5vh 5vh;
+}
