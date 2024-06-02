@@ -30,7 +30,7 @@ Also talked about connecting mongodb and node.js[task for Doc]
 1) Need to connect mongodb and node.js. Need to work on 
 how data will be formatted for database.  
 
-
+<br>
 
 *TASKS for Darnell*
 
