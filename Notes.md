@@ -8,10 +8,10 @@ npm install express cors mongodb nodemon
 
 or just "npm install" since it's all in package.json
 
-#Notes from Meeting 1
+## Notes from Meeting 1
 
+Idea: Chore Web App
 
-Notes from meeting #1: Idea: Chore Web App
 Things we spoke about: 
 1) Need to express in the MERN acronym for our SMS messages and HTTP requests
 2) We are looking for a 1x2 grid format for our welcome page, with (1,1)  = about page (1,2) = register page/button .  Alternatively, we have a 1x1 grid format that has BOTH register button and about info on same page
