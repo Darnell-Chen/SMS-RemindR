@@ -8,7 +8,9 @@ npm install express cors mongodb nodemon
 
 or just "npm install" since it's all in package.json
 
-#Notes from Meeting #1
+#Notes from Meeting 1
+
+
 Notes from meeting #1: Idea: Chore Web App
 Things we spoke about: 
 1) Need to express in the MERN acronym for our SMS messages and HTTP requests
