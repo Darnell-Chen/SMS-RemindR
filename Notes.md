@@ -23,10 +23,11 @@ NOtes were about custom convention for creating the frontend.
 Also talked about connecting mongodb and node.js[task for Doc]
 
 ## Week 1
-***TASKS for Ardoine 
+*TASKS for Ardoine*
 -1) Need to connect mongodb and node.js. Need to work on 
 how data will be formatted for database.  
-***TASKS for Darnell
+
+*TASKS for Darnell*
 -1) Work on the beginning stages of frontend
 
 ***GOALS/PLANS
