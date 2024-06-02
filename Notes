@@ -21,6 +21,8 @@ Things we spoke about:
 NOtes were about custom convention for creating the frontend.
 -Also talked about the NoSQL database that we want to use. We are prioritizing the use of the JSON files/objects.
 Also talked about connecting mongodb and node.js[task for Doc]
+
+## Week 1
 ***TASKS for Ardoine 
 -1) Need to connect mongodb and node.js. Need to work on 
 how data will be formatted for database.  
@@ -29,3 +31,6 @@ how data will be formatted for database.
 
 ***GOALS/PLANS
 -a) 
+
+## Week 2
+create fetch requests for creating user accounts and use express js to accept and process the fetch requests
