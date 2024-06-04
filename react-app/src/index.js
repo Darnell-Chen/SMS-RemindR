@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import NavBar from './components/navbar';
+import App from './App'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('nav-root'));
+const body = ReactDOM.createRoot(document.getElementById('body-root'));
 // for now, we don't render anything in react
 root.render(
-  <React.StrictMode>
-    {/* <App /> */}
-  </React.StrictMode>
+    <NavBar/>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+body.render(
+  <App/>
+)
