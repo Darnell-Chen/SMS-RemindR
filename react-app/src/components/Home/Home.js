@@ -4,7 +4,7 @@ import Registration from './Registration';
 
 function Home() {
     // we'll use this to decide whether to display login or register page
-    const [myForm, setForm] = useState();
+    const [myForm, setForm] = useState('Login');
 
     return (
         <React.Fragment>
@@ -16,8 +16,10 @@ function Home() {
                             <p>We're a simple and user-friendly app that enables planning and reminders using SMS messages! Stop using traditional planners, and start using SMS-RemindR to manage your day - and your family's.</p>                        
                         </div>
 
+
                         <div className="col right-side">
-                            <Registration />
+                            {/* we'll pass children as props to decide which form to use*/}
+                            {myForm === 'Registration' ? <Registration setForm="setForm"/> : <Login setForm="setForm"/>}
                         </div>
 
                     </div>

@@ -14,18 +14,6 @@
     margin-bottom: 2vh;
 }
 
-.registerForm input{
-    box-sizing: border-box;
-    width: 100%;
-    margin-bottom: 1vh;
-    background: rgba(255, 255, 255, 0.253);
-    color: white;
-    border: none;
-    color: white;
-    padding: 5px 5px 5px 5px;
-    font-size: larger;
-}
-
 .registerForm input:focus {
     outline: solid 2px white;
 }
@@ -36,7 +24,6 @@
 
 .RegisterButton {
     transition: all 0.1s ease-in-out;
-    background-color: transparent;
     border: solid 3px white;
     width: fit-content;
     min-width: 30%;
@@ -86,4 +73,15 @@
 
 .register-password-Div {
     padding: 15px 0px 0px 0px;
+}
+
+.registerForm input{
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 1vh;
+    background: rgba(255, 255, 255, 0.253);
+    color: white;
+    border: none;
+    padding: 5px 5px 5px 5px;
+    font-size: larger;
 }

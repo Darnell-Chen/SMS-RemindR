@@ -12,7 +12,7 @@ function Login() {
                     <button className="loginOptions">Forgot Password</button>
                     <button className="loginOptions">Register Here</button>
 
-                    <button className="loginButton">Let's Go</button>
+                    <input className="loginButton" type="submit"/>
                 </div>
             </form>
         </>
