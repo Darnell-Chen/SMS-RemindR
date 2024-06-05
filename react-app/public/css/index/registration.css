@@ -5,7 +5,7 @@
     --loginButtonHover: rgb(101, 209, 55);
 }
 
-.loginForm {
+.registerForm {
     padding-left: 10vh;
     padding-right: 10vh;
 }
@@ -14,7 +14,7 @@
     margin-bottom: 2vh;
 }
 
-.loginForm input{
+.registerForm input{
     box-sizing: border-box;
     width: 100%;
     margin-bottom: 1vh;
@@ -26,15 +26,15 @@
     font-size: larger;
 }
 
-.loginForm input:focus {
+.registerForm input:focus {
     outline: solid 2px white;
 }
 
-.loginForm input::placeholder {
+.registerForm input::placeholder {
     color: rgb(233, 255, 226);
 }
 
-.loginButton {
+.RegisterButton {
     transition: all 0.1s ease-in-out;
     background-color: transparent;
     border: solid 3px white;
@@ -47,24 +47,43 @@
     margin-top: 2vh;
 }
 
-.loginButton:hover {
+.RegisterButton:hover {
     scale: 1.03;
     color: var(--baseGreen);
     background-color: white;
     box-shadow: 5px 5px 15px rgba(87, 117, 79, 0.322);
 }
 
-.login-options-div {
-    width: 100%;
-    text-align: right;
-}
-
-.loginOptions {
+.registerOption {
     padding: 0px;
     margin: 0px;
     color: white;
     background-color: transparent;
     border: none;
-    display: block;
-    text-align: left;
+    text-align: right;
+}
+
+.register-options-div {
+    width: 100%;
+    text-align: right;
+}
+
+.register-name-Div {
+    padding: 0px 0px 10px 0px;
+}
+
+.register-name-Div :first-child{
+    box-sizing: border-box;
+    width: 49%;
+    margin-right: 1%;
+}
+
+.register-name-Div :last-child{
+    box-sizing: border-box;
+    width: 49%;
+    margin-left: 1%;
+}
+
+.register-password-Div {
+    padding: 15px 0px 0px 0px;
 }

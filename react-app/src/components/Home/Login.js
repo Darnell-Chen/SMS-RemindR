@@ -5,13 +5,15 @@ function Login() {
         <>
             <h2>Login</h2>
             <form className="loginForm">
-                <input placeholder="Username" type="text"/>
+                <input placeholder="Email" type="text"/>
                 <input placeholder="Password" type="text"/>
 
-                <button className="loginOptions">Forgot Password</button>
-                <button className="loginOptions">Register Here</button>
+                <div className="login-options-div">
+                    <button className="loginOptions">Forgot Password</button>
+                    <button className="loginOptions">Register Here</button>
 
-                <button className="loginButton">Let's Go</button>
+                    <button className="loginButton">Let's Go</button>
+                </div>
             </form>
         </>
     )
