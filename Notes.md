@@ -9,7 +9,9 @@ NodeJS
 
 or just "npm install" since it's all in package.json
 
+
 [*]Notes from Meeting 1
+
 
 Idea: Chore Web App
 
@@ -24,6 +26,7 @@ Things we spoke about:
 NOtes were about custom convention for creating the frontend.
 -Also talked about the NoSQL database that we want to use. We are prioritizing the use of the JSON files/objects.
 Also talked about connecting mongodb and node.js[task for Doc]
+
 [*]Notes from Meeting 3
 -Contemplating on whether to make application singular or multiple pages. Discussed
 a few goals for week 3 which are written below
@@ -32,6 +35,7 @@ a few goals for week 3 which are written below
 the index.html page rolling.
 -IMPT: Task that seems most difficult @ this point is parsing through POST data and reacting 
 properly depending on user that is logged in.
+
 ## Week 1
 *TASKS for Ardoine*
 
@@ -47,6 +51,7 @@ properly depending on user that is logged in.
 
 ## Week 2
 create fetch requests for creating user accounts and use express js to accept and process the fetch requests
+
 ## Week 3
 *TASKS for Ardoine*
 
@@ -56,4 +61,5 @@ create fetch requests for creating user accounts and use express js to accept an
 
 *TASKS for Darnell*
 1) Work on the index.html page and begin working on writing code neccessary to implement dyanmic logins based on user credentials.
+
 
