@@ -19,7 +19,7 @@ function Home() {
 
                         <div className="col right-side">
                             {/* we'll pass children as props to decide which form to use*/}
-                            {myForm === 'Registration' ? <Registration setForm="setForm"/> : <Login setForm="setForm"/>}
+                            {myForm === 'Registration' ? <Registration setForm={setForm}/> : <Login setForm={setForm}/>}
                         </div>
 
                     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Login() {
+function Login(props) {
     return (
         <>
             <h2>Login</h2>
@@ -9,11 +9,16 @@ function Login() {
                 <input placeholder="Password" type="text"/>
 
                 <div className="login-options-div">
-                    <button className="loginOptions">Forgot Password</button>
-                    <button className="loginOptions">Register Here</button>
-
-                    <input className="loginButton" type="submit"/>
+                    <div>
+                        <a href="#" className="loginOptions">Forgot Password?</a>
+                    </div>
+                    <div>
+                        <a href="#" className="loginOptions" onClick={() => {props.setForm('Registration')}}>Register Here</a>
+                    </div>
                 </div>
+
+                    
+                <input className="loginButton" type="submit"/>
             </form>
         </>
     )

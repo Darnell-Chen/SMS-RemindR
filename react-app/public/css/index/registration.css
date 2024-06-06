@@ -32,6 +32,7 @@
     color: white;
     border-radius: 3.7px;
     margin-top: 2vh;
+    background-color: transparent;
 }
 
 .RegisterButton:hover {
@@ -53,6 +54,10 @@
 .register-options-div {
     width: 100%;
     text-align: right;
+}
+
+.register-options-div a:hover{
+    cursor: pointer;
 }
 
 .register-name-Div {

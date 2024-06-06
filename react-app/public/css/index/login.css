@@ -1,7 +1,6 @@
 :root {
     --baseGreen: rgb(96, 221, 87);
     --baseGreen2: rgb(45, 133, 45);
-
     --loginButtonHover: rgb(101, 209, 55);
 }
 
@@ -10,19 +9,18 @@
     padding-right: 10vh;
 }
 
-.right-side h2{
+.right-side h2 {
     margin-bottom: 2vh;
 }
 
-.loginForm input{
+.loginForm input {
     box-sizing: border-box;
     width: 100%;
     margin-bottom: 1vh;
     background: rgba(255, 255, 255, 0.253);
     color: white;
     border: none;
-    color: white;
-    padding: 5px 5px 5px 5px;
+    padding: 5px;
     font-size: larger;
 }
 
@@ -59,9 +57,19 @@
     text-align: right;
 }
 
+.login-options-div div{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.login-options-div a:hover {
+    cursor: pointer;
+}
+
 .loginOptions {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     color: white;
     background-color: transparent;
     border: none;
