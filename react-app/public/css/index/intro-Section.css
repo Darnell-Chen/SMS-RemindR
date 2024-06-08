@@ -1,0 +1,28 @@
+:root {
+    --baseGreen: rgb(96, 221, 87);
+    --baseGreen2: rgb(45, 133, 45);
+}
+
+.introDiv {
+    text-align: left;
+    justify-content: center;
+}
+
+.introDiv .right-side {
+    text-align: center;
+    color: white;
+}
+
+.introSection {
+    box-sizing: border-box;
+    padding: 15vh 5vh 15vh 5vh;
+}
+
+.introSection h1 {
+    color: white;
+}
+
+.introSection p {
+    font-size: 2.5vh;
+    color: white;
+}

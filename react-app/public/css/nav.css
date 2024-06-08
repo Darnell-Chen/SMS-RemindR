@@ -1,0 +1,25 @@
+:root {
+    --baseGreen: rgb(96, 221, 87);
+    --baseGreen2: rgb(45, 133, 45);
+}
+
+body {
+    background-color: var(--baseGreen);
+}
+
+.navbar {
+    background: var(--baseGreen2)
+}
+
+.navbar span{
+    color: white;
+    font-weight: bold;
+    padding-left: 5vw;
+    font-style: italic;
+    font-size: 3vh;
+}
+
+.second-section {
+    background-color: white;
+    padding: 5vh 5vh 5vh 5vh;
+}

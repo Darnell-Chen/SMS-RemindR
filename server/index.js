@@ -1,14 +1,28 @@
-const http = require('node:http');
+const express = require('express') 
+const bodyParser = require('body-parser');
+const cors = require('cors') 
 
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = 3001;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, World!\n');
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
+app.use((req, res, next) => {
+  if (req.url === '/#') {
+      res.redirect('/');
+  } else {
+      next();
+  }
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-}); 
+app.post("/", (req, res) => {
+  console.log(req.body);
+
+  res.status(201).send("Account registered successfully.");
+})
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
