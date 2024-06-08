@@ -4,7 +4,7 @@ function Login(props) {
     return (
         <>
             <h2>Login</h2>
-            <form className="loginForm">
+            <form className="loginForm" onSubmit={(e, props) => onLogin}>
                 <input placeholder="Email" type="text"/>
                 <input placeholder="Password" type="text"/>
 
@@ -18,7 +18,7 @@ function Login(props) {
                 </div>
 
                     
-                <input className="loginButton" type="submit"/>
+                <button className="loginButton" type="submit">Login</button>
             </form>
         </>
     )
