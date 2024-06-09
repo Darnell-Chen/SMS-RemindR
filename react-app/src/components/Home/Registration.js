@@ -37,6 +37,8 @@ async function onRegister(e, props){
 
     const currForm = new FormData(e.currentTarget);
 
+    currForm.append('action', 'register');
+
     // for some reason, the formdata body isn't being recieved if I simply send the fetch request
     // as a multiform / default content-type
     const myData = new URLSearchParams(currForm).toString();
