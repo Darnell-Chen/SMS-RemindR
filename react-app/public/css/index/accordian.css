@@ -1,0 +1,76 @@
+:root {
+    --baseGreen: rgb(96, 221, 87);
+    --baseGreen2: rgb(45, 133, 45);
+    --baseGreen3: rgb(37, 150, 37);
+    --baseGreen4: rgb(52, 161, 52);
+    --baseGreen5: rgb(40, 126, 40);
+}
+
+
+.aboutUs-Section {
+    background-color: var(--baseGreen2);
+}
+
+.accordion-item {
+    background-color: var(--baseGreen3);
+    color: white;
+    border: none;
+    margin: 0px;
+    border-bottom: 2px solid var(--baseGreen5);
+}
+
+.accordion-title-div {
+    background-color: transparent;
+    color: white;
+    background: transparent;
+    margin: 0px;
+    padding-left: 2vh;
+    padding-right: 2vh;
+}
+
+.accordion-title-div:hover{
+    transition: 0.2s ease-in-out;
+    background-color: var(--baseGreen2);
+}
+
+.accordion-content {
+    padding: 2vh 12vh 2vh 12vh;
+    background-color: var(--baseGreen4);
+    font-size: 2vh;
+}
+
+.accordion-title-div p{
+    font-size: 2.5vh;
+    margin: 0px;
+    padding: 1vh 10vh 1vh 10vh;
+}
+
+@media only screen and (max-width: 575.98px) {
+    .accordion-title-div p{
+        font-size: 2.5vh;
+        margin: 0px;
+        padding: 1vh 0vh 1vh 0vh;
+    }
+
+    .accordion-content {
+        padding: 1vh 2vh 1vh 2vh;
+        background-color: var(--baseGreen4);
+        font-size: 2vh;
+    }
+}
+
+
+/* this is the whole container for an individual item */
+.accordion-item {
+    margin: 0px;
+}
+
+.accordianSign {
+    margin: 0px;
+    text-align: right;
+}
+
+.accordian {
+    padding: 0px;
+    margin: 0px;
+}
