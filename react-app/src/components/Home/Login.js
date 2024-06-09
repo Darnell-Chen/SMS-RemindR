@@ -5,8 +5,8 @@ function Login(props) {
         <>
             <h2>Login</h2>
             <form className="loginForm" onSubmit={(e, props) => onLogin(e, props)}>
-                <input placeholder="Email" type="text"/>
-                <input placeholder="Password" type="text"/>
+                <input name="email" placeholder="Email" type="text"/>
+                <input name="password" placeholder="Password" type="text"/>
 
                 <div className="login-options-div">
                     <div>
