@@ -4,7 +4,7 @@ function Login(props) {
     return (
         <>
             <h2>Login</h2>
-            <form className="loginForm" onSubmit={(e, props) => onLogin}>
+            <form className="loginForm" onSubmit={(e, props) => onLogin(e, props)}>
                 <input placeholder="Email" type="text"/>
                 <input placeholder="Password" type="text"/>
 
@@ -22,6 +22,31 @@ function Login(props) {
             </form>
         </>
     )
+}
+
+async function onLogin(e, props){
+    // stops page from reloading automatically
+    e.preventDefault();
+
+    const currForm = new FormData(e.currentTarget);
+
+    // for some reason, the formdata body isn't being recieved if I simply send the fetch request
+    // as a multiform / default content-type
+    const myData = new URLSearchParams(currForm).toString();
+
+    const response = await fetch('http://127.0.0.1:3001', {
+        method: 'POST',
+        body: myData,
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded',
+        }
+    });
+
+    const serverResponse = await response.text();
+
+    if (response.status === 201) {
+        console.log(serverResponse);
+    }
 }
 
 export default Login;
