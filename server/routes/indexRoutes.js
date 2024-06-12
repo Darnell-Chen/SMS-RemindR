@@ -82,8 +82,24 @@ function registerOperation(req, res) {
 
 
 
-function authenticateToken(req, res, next) {
+function authenticateToken(req, res) {
+    const authHeader = req.headers['authorization'];
 
+    // separating b/c the token will write "BEARER token", which we only need the token
+    const token = authHeader && authHeader.split(" ")[1];
+
+    if (token == null) {
+        return res.sendStatus(401);
+    }
+
+    // user here is the user object we passed in loginOperation()
+    jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
+        if (err) {
+            return res.sendStatus(403);
+        }
+
+        req.user = user;
+    });
 }
 
 
