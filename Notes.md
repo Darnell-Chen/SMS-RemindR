@@ -57,3 +57,11 @@ create fetch requests for creating user accounts and use express js to accept an
 *TASKS for Darnell*
 1) Work on the index.html page and begin working on writing code neccessary to implement dyanmic logins based on user credentials.
 
+
+## Week 4
+
+*Task for Ardoine*
+
+1) Work on Registration using MongoDB's built-in createUser() function. Make sure to include properties such as the user's number and name. Return a status code of 200 or 500, depending on if the user is able to register or not. Also return a message of "success" or "fail".
+
+2) Work on the Login function by Querying MongoDB to see if the user exists (using both the username and password to verify - check if mongodb already has a built in function for this). Return a JWT auth token if login is successful with status code 200. Return a 500 status code if login fails, with a message of either "success" or "fail".
