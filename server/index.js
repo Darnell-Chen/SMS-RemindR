@@ -8,7 +8,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const hostname = '127.0.0.1';
 const port = 3001;
-const uri = "mongodb+srv://Chore:Door@sms-remindr.xozoopn.mongodb.net/?retryWrites=true&w=majority&appName=SMS-RemindR";
+const uri = process.env.MONGODB_URI;
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
