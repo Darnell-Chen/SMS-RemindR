@@ -1,6 +1,9 @@
+require('dotenv').config();
+
 const express = require('express') 
 const bodyParser = require('body-parser');
 const cors = require('cors') 
+const indexRoutes = require('./routes/indexRoutes');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const hostname = '127.0.0.1';
@@ -10,8 +13,6 @@ const uri = "mongodb+srv://Chore:Door@sms-remindr.xozoopn.mongodb.net/?retryWrit
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-
-
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -43,31 +44,13 @@ async function run() {
       
     });
 
-  } finally {
-    // Ensures that the client will close when you finish/error
-    client.close();
+  } catch (e) {
+    console.log("Problem connecting to MongoDB Client:", e);
   }
 }
 run().catch(console.dir);
 
 
 
-app.use((req, res, next) => {
-  if (req.url === '/#') {
-      res.redirect('/');
-  } else {
-      next();
-  }
-});
-
-
-app.post("/", (req, res) => {
-  console.log(req.body);
-  console.log(req.body.email);
-
-  // tells you what action to do
-  // based on this, do async functions for the action
-  console.log(req.body.action);
-
-  res.status(201).send("Account registered successfully.");
-})
+// this is the routes for all fetch requests from the index page (from front-end)
+app.use(indexRoutes);
