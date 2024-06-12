@@ -77,6 +77,8 @@ function registerOperation(req, res) {
         number: telephone
     }
 
+    console.log(req.body.email);
+
     console.log(user);
 }
 
