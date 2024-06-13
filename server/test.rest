@@ -1,12 +1,12 @@
 
 
-POST http://localhost:3001/
+POST http://localhost:3001/register
 Content-Type: application/x-www-form-urlencoded
 Referer: http://localhost:3000/
 
 email=test@gmail.com&password=testPassword&action=registration&fname=Darnell&lname=Chen&telephone=4047897733
-
 # email=test@gmail.com&password=testPassword&action=login
+
 
 ###
 
