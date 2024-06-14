@@ -1,6 +1,7 @@
 import { useNavigate, useEffect } from "react-router-dom";
 
 function Dashboard() {
+    const [data, setData] = useState(null);
     const navigate = useNavigate();
 
     // generally, it's advised to store refreshToken in http-only cookie, but this is just for a small project
@@ -14,14 +15,24 @@ function Dashboard() {
               'Content-Type': 'application/json',  // Optional for GET requests
               'Accept': 'application/json'
             }
-          });
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+
     }
 
-    if (localStorage.getItem("authToken") == null && localStorage.getItem("refreshToken") == null) {
-        navigate("/");
-    } else {
-        getData();
-    }
+    useEffect(() => {
+        if (localStorage.getItem("authToken") == null && localStorage.getItem("refreshToken") == null) {
+            navigate("/");
+        } else {
+            getData();
+        }
+    }, [])  // using an empty use dependency so that it only runs on the initial render
+
+
 }
 
 export default Dashboard;
