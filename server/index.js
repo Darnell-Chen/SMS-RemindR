@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors') 
 const indexRoutes = require('./routes/indexRoutes');
 const { MongoClient, ServerApiVersion } = require('mongodb');
+// ^^ Note by Ardoine: I wanna delete this b/c its better if its
+// in the indexRoutes.js file instead.
 
 const hostname = '127.0.0.1';
 const port = 3001;
