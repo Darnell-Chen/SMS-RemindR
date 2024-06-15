@@ -20,7 +20,8 @@ router.get("/getData", authenticateToken, (req, res) => {
         authToken: newToken,
         fname: "Darnell",
         lname: "Chen",
-        familyCount: 0
+        familyCount: 0,
+        messageCount: 0
     });
 })
 

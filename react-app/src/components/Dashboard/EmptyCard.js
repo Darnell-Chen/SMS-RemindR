@@ -1,9 +1,10 @@
-function emptyCard() {
+function EmptyCard() {
     return (
         <>
             <div className="Empty-Card-Div">
-                <h1>+</h1>
             </div>
         </>
     )
 }
+
+export default EmptyCard;

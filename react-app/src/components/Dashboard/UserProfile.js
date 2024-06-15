@@ -1,3 +1,5 @@
+import '../css/Dashboard.css';
+
 function userProfile(props) {
 
     const logoutSequence = () => {
@@ -8,12 +10,17 @@ function userProfile(props) {
 
     return (
         <>
-            <div className="User-Profile-Div col-4 justify-content-center">
+            <div className='User-Profile-Div'>
                 <div className="row">
-                    <h1>Hi</h1>
-                    <h2>Darnell {/***Put props name here**/}</h2>
-                    <p> Telephone: 803-584-5718 </p>
-                    <p> Email: fakeEmail@gmail.com </p>
+                    <h1>Hi <span className="Profile-Name">Darnell,</span></h1>
+
+                    <h2>Welcome to SMS-RemindR</h2>
+                    <h4> Telephone: 803-XXX-XXXX </h4>
+                    <h4> Email: fakeEmail@gmail.com </h4>
+
+                    <h4> You currently have: </h4>
+                    <h5> 5 Family Members</h5>
+                    <h6> 1 daily SMS </h6>
                 </div>
 
                 <div className="row">

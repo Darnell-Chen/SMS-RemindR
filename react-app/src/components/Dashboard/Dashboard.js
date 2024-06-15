@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UserCard from "./UserProfile";
+import FamilyBoard from "./FamilyBoard";
+import "../css/Dashboard.css"
 
 function Dashboard() {
     const [data, setData] = useState(null);
@@ -47,7 +49,14 @@ function Dashboard() {
 
     return (
         <>
-            <UserCard cardData={data} cardNav={navigate}/>
+            <div className="Dashboard-Div row">
+                <div className="Dashboard-Containers col-sm-4">
+                    <UserCard cardData={data} cardNav={navigate}/>
+                </div>
+                <div className="Dashboard-Containers col-sm-8">
+                    <FamilyBoard cardData={data}/>
+                </div>
+            </div>
         </>
     )
 }
