@@ -1,0 +1,51 @@
+.Dashboard-Div {
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100vw;
+    height: 92vh;
+}
+
+.Dashboard-Containers {
+    overflow: hidden;
+    padding: 5vh;
+}
+
+.User-Profile-Div {
+    background-color: rgba(255, 255, 255, 0.712);
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 5vh;
+    border-radius: 3vh;
+}
+
+.UserCard-Container-Div {
+    background-color: rgba(255, 255, 255, 0.712);
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 5vh;
+    border-radius: 3vh;
+    height: 100%;
+}
+
+.Card-Rows {
+    height: 33%;
+}
+
+.Card-Cols {
+    height: 100%;
+}
+
+.Add-Card-Div {
+    justify-content: center;
+    text-align: center;
+    border-radius: 5%;
+    width: 95%;
+    height: 95%;
+    box-sizing: border-box;
+    box-shadow: 5px 5px 10px rgba(150, 148, 148, 0.301);
+}
+
+.Empty-Card {
+    height: 100%;
+    width: 100%;
+}

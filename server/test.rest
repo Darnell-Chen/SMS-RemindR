@@ -1,0 +1,37 @@
+
+
+POST http://localhost:3001/register
+Content-Type: application/x-www-form-urlencoded
+Referer: http://localhost:3000/
+
+
+
+email=test1@gmail.com&password=testPassword&action=registration&fname=Darnell&lname=Chen&telephone=4047897733
+
+
+###
+
+POST http://localhost:3001/login
+Content-Type: application/x-www-form-urlencoded
+Referer: http://localhost:3000/
+
+
+email=test@gmail.com&password=testPassword&action=login
+
+
+###
+
+POST http://localhost:3001/addMember
+Content-Type: application/x-www-form-urlencoded
+Referer: http://localhost:3000/
+
+{
+    "authToken" : "oiwdhfjiouqewhjr8u1h32iuon324892374u923ij",
+    "fname" : "John",
+    "lname" : "Doe",
+    "number" : "XXX-XXX-XXXX",
+    "num_messages" : "0"
+}
+
+##
+
