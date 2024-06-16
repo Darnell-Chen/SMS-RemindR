@@ -14,42 +14,11 @@ const client = new MongoClient(uri, {
 const jwt = require("jsonwebtoken");
 const express = require('express');
 const router = express.Router();
-// a middleware to say the "/" and "/#" origins are the same
-router.use((req, res, next) => {
-    if (req.url === '/#') {
-        res.redirect('/');
-    } else {
-        next();
-    }
-});
-
-
-
-/************ Post for Index *************/
-
-
-router.post("/register", (req, res) => {
-
-    if (req.body.action && req.body.action === "login") {
-        loginOperation(req, res);
-
-    } else if (req.body.action && req.body.action === "registration") {
-        registerOperation(req, res);
-
-    } else {
-        res.status(300).send("No Actions.");
-    }
-})
-
-
-
-
-
 
 
 /************ Login Function *************/
 
-async function loginOperation(req, res) {
+router.post("/login", async (req, res) => {
     console.log("reached login operation");
     const {email, password} = req.body;
     const database_id = 'draft1';
@@ -61,7 +30,7 @@ async function loginOperation(req, res) {
     // the JWT auth token.
 
 
-    // this will be our jwt payload (typically defined as JSON object)
+    // this will be our jwt payload (typically defined as an JSON object)
     const user = {
         username: email,
         password: password
@@ -79,7 +48,7 @@ async function loginOperation(req, res) {
         } else {
                 console.log("Login Succesful");
                 // this is the auth token that the user will store for continued connection
-                const authToken = jwt.sign(user, process.env.JWT_SECRET_KEY);
+                const authToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
                 res.status(200).json({authToken: authToken});
         }
 
@@ -87,7 +56,7 @@ async function loginOperation(req, res) {
         console.log("Login Unsuccessful");
         res.status(500).send("Login Unsuccessful");
     }
-}
+})
 
 
 
@@ -95,16 +64,8 @@ async function loginOperation(req, res) {
 
 
 /************ Register Function *************/
-// TASK #1: Create a classes.js file and put it in
-// the src folder[create one if it isn't there already]. b) Create
-// a custom Error class that inherits the Error object
-// so that you can throw the exception for invalid data.
-// TASK #2: Use the cloud database commands from the mongodb node driver 
-// to check if the JSON data exists in the database. If it exists, ensure to 
-// throw the custom exception and send the status code representing the 
-// fail. Otherwise, use MongoDB's built in createUser function and pass the 
-// neccessary JSON data to the function.
-async function registerOperation(req, res) {
+
+router.post("/register", async (req, res) => {
     console.log("reached registration operation");
 
     // all of the information passed in from form data
@@ -156,7 +117,7 @@ async function registerOperation(req, res) {
         // Will run function to run the neccessary error needed to 
         // be output as requested by Darnell.
     }
-}
+})
 
 
 
@@ -179,5 +140,6 @@ function authenticateToken(req, res) {
         req.user = user;
     });
 }
+
 
 module.exports = router;

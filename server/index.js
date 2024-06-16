@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors') 
 const indexRoutes = require('./routes/indexRoutes');
+const dashRoutes = require('./routes/dashRoutes');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 // ^^ Note by Ardoine: I wanna delete this b/c its better if its
 // in the indexRoutes.js file instead.
@@ -55,4 +56,6 @@ run().catch(console.dir);
 
 
 // this is the routes for all fetch requests from the index page (from front-end)
+// as well as all fetch requests from dashboard
 app.use(indexRoutes);
+app.use(dashRoutes);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Login from './Login'
 import Registration from './Registration';
 
+
 function Home() {
     // we'll use this to decide whether to display login or register page
     const [myForm, setForm] = useState('Login');
