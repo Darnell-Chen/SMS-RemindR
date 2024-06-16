@@ -28,7 +28,7 @@ router.use((req, res, next) => {
 /************ Post for Index *************/
 
 
-router.post("/", (req, res) => {
+router.post("/register", (req, res) => {
 
     if (req.body.action && req.body.action === "login") {
         loginOperation(req, res);

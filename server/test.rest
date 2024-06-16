@@ -4,9 +4,7 @@ POST http://localhost:3001/
 Content-Type: application/x-www-form-urlencoded
 Referer: http://localhost:3000/
 
-{
-    name: "John Doe"
-}
+
 
 # email=test1@gmail.com&password=testPassword&action=registration&fname=Darnell&lname=Chen&telephone=4047897733
 
