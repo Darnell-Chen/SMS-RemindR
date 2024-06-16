@@ -72,6 +72,6 @@ create fetch requests for creating user accounts and use express js to accept an
 
 1) Work on adding family members on "/addMember" post Request to MongoDB. 
 
-Notes:   Intitialize family size to 0 when user initially registers the account.
-
-         Use req.user.email to get the email for querying MongoDB.
+Notes:   
+- Intitialize family size to 0 when user initially registers the account.
+- Use req.user.email to get the email for querying MongoDB.
