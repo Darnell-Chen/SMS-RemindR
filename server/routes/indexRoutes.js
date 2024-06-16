@@ -1,6 +1,8 @@
 require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = 'mongodb+srv://Chore:<password>@sms-remindr.xozoopn.mongodb.net/?retryWrites=true&w=majority&appName=SMS-RemindR';
+
+const uri = process.env.MONGODB_URI;
+
 const client = new MongoClient(uri, {
     serverApi: {
       version: ServerApiVersion.v1,
@@ -8,6 +10,7 @@ const client = new MongoClient(uri, {
       deprecationErrors: true,
     }
   }) 
+
 const jwt = require("jsonwebtoken");
 const express = require('express');
 const router = express.Router();
@@ -46,7 +49,7 @@ router.post("/", (req, res) => {
 
 /************ Login Function *************/
 
-function loginOperation(req, res) {
+async function loginOperation(req, res) {
     console.log("reached login operation");
     const {email, password} = req.body;
     const database_id = 'draft1';
@@ -63,26 +66,27 @@ function loginOperation(req, res) {
         username: email,
         password: password
     }
+
+    const draft1_db = client.db('draft1');
+    coll_accounts = draft1_db.collection('Accounts');
+    const count = await coll_accounts.countDocuments(user);
     
     try {
-        if(client.db(database_id).collections.find(user).size() == 0) {
+        if(count == 0) {
             // This means user daata is invalid.
             throw Error;
-    } else {
-            console.log("Login Succesful");
-    
 
-    // this is the auth token that the user will store for continued connection
-    const authToken = jwt.sign(user, process.env.JWT_SECRET_KEY);
-    res.json({authToken: authToken})
-    res.status(200).send('Login Successful')
+        } else {
+                console.log("Login Succesful");
+                // this is the auth token that the user will store for continued connection
+                const authToken = jwt.sign(user, process.env.JWT_SECRET_KEY);
+                res.status(200).json({authToken: authToken});
+        }
+
+    } catch(Error) {
+        console.log("Login Unsuccessful");
+        res.status(500).send("Login Unsuccessful");
     }
-}catch(Error) {
-    console.log("Login Unsuccessful")
-    res.status(500).send("Login Unsuccessful")
-
-
-}
 }
 
 
@@ -100,10 +104,8 @@ function loginOperation(req, res) {
 // throw the custom exception and send the status code representing the 
 // fail. Otherwise, use MongoDB's built in createUser function and pass the 
 // neccessary JSON data to the function.
-function registerOperation(req, res) {
+async function registerOperation(req, res) {
     console.log("reached registration operation");
-
-    res.status(200).send('Response from registration operation');
 
     // all of the information passed in from form data
     const {fname, lname, telephone, email, password} = req.body;
@@ -120,23 +122,26 @@ function registerOperation(req, res) {
         // Replicate JSON object with the 
         // JSON data representing the account.
     }
+
     const database_id = 'draft1';
     const draft1_db = client.db('draft1');
     coll_accounts = draft1_db.collection('Accounts');
+
     arrOfAccounts = draft1_db.collection('Accounts').find();//<-- Returns all of the 
     // accounts from the account collection from database.
     try {
-        if(coll_accounts.find(newUser).size() == 0) {
+        const count = await coll_accounts.countDocuments(newUser);
+
+        console.log(count);
+
+        if(count == 0) {
+            console.log("here");
             // Implies that account doesn't exist which means we must 
             // add the account to the collections AND run MongoDB's 
             // createUser function.
             coll_accounts.insertOne(newUser);//<-- Inserts account inst into collections.
             // creating new user:
-            const result = db.command({createUser: newUser.username, pwd: newUser.password,
-                roles: [{role: 'readWrite', db: database_id}]
 
-            });
-            console.log('User created:',result);
             res.status(200).send('Registration Successful');
 
 
@@ -145,17 +150,12 @@ function registerOperation(req, res) {
         }
 
 
-    }catch(failedRegistration) {
+    } catch(failedRegistration) {
         console.error("Registration Failed");
         res.status(500).send("Registration Failed")
         // Will run function to run the neccessary error needed to 
         // be output as requested by Darnell.
     }
-
-
-    console.log(req.body.email);
-
-    console.log(user);
 }
 
 
@@ -179,4 +179,5 @@ function authenticateToken(req, res) {
         req.user = user;
     });
 }
+
 module.exports = router;
