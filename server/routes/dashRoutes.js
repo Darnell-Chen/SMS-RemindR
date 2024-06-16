@@ -5,10 +5,14 @@ const express = require('express');
 
 const router = express.Router();
 
+
+/**************************** Route for Getting User Data *******************************/
+
 router.get("/getData", authenticateToken, (req, res) => {
 
     // we'll attach a new jwt access token that will have another 30 minutes of access using the same user object
     const user = {
+        // how you get user email - use req.user.email to query for user
         email: req.user.email
     }
     const newToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
@@ -27,14 +31,22 @@ router.get("/getData", authenticateToken, (req, res) => {
 
 
 
+/**************************** Route for Adding Family Members *******************************/
+
 router.post("/addMember", authenticateToken, (req, res) => {
     const user = {
+        // how you get user email - use req.user.email to query for user
         email: req.user.email
     }
     const newToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
 })
 
 
+
+
+
+
+/**************************** Authentication Middleware *******************************/
 
 function authenticateToken(req, res, next) {
     const authToken = req.headers['authorization'];
