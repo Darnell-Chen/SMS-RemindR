@@ -27,6 +27,15 @@ router.get("/getData", authenticateToken, (req, res) => {
 
 
 
+router.post("/addMember", authenticateToken, (req, res) => {
+    const user = {
+        email: req.user.email
+    }
+    const newToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
+})
+
+
+
 function authenticateToken(req, res, next) {
     const authToken = req.headers['authorization'];
 

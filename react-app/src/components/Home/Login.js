@@ -20,7 +20,7 @@ function Login(props) {
             }
         });
 
-        if (response.status === 201) {
+        if (response.ok) {
             const tokens = await response.json();
             
             const { authToken, refreshToken } = tokens;
@@ -28,6 +28,9 @@ function Login(props) {
             // generally, it's advised to store refreshToken in http-only cookie, but this is just for a small project
             localStorage.setItem("authToken", authToken);
             localStorage.setItem("refreshToken", refreshToken);
+
+            console.log("successful");
+
             navigate("/dashboard");
         }
     };
