@@ -38,6 +38,9 @@ router.post("/addMember", authenticateToken, (req, res) => {
         // how you get user email - use req.user.email to query for user
         email: req.user.email
     }
+
+    const query = req.user.email;
+
     const newToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
 })
 
