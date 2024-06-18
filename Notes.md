@@ -65,3 +65,13 @@ create fetch requests for creating user accounts and use express js to accept an
 1) Work on Registration using MongoDB's built-in createUser() function. Make sure to include properties such as the user's number and name. Return a status code of 200 or 500, depending on if the user is able to register or not. Also return a message of "success" or "fail".
 
 2) Work on the Login function by Querying MongoDB to see if the user exists (using both the username and password to verify - check if mongodb already has a built in function for this). Return a JWT auth token if login is successful with status code 200. Return a 500 status code if login fails, with a message of either "success" or "fail".
+
+## Week 4.5
+
+*Task for Ardoine*
+
+1) Work on adding family members on "/addMember" post Request to MongoDB. 
+
+Notes:   
+- Intitialize family size to 0 when user initially registers the account.
+- Use req.user.email to get the email for querying MongoDB.
