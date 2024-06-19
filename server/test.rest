@@ -24,11 +24,23 @@ Referer: http://localhost:3000/
 Authorization: bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzE4NzY2OTAyLCJleHAiOjE3MTg3Njg3MDJ9.KZQznVE4aUr7fzpRG7gNuMO4znKumc7qQT23sg6Z6ys
 
 {
+    "authToken" : "lear oiwdhfjiouqewhjr8u1h32iuon324892374u923ij",
     "fname" : "John",
     "lname" : "Doe",
     "number" : "XXX-XXX-XXXX",
     "num_messages" : "0"
 }
+###
+POST http://localhost:3001/addMember
+Content-Type: application/json
+Referer: http://localhost:3000/
+Authorization: bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzE4NzY2OTAyLCJleHAiOjE3MTg3Njg3MDJ9.KZQznVE4aUr7fzpRG7gNuMO4znKumc7qQT23sg6Z6ys
 
+{  
+    "fname" : "John",
+    "lname" : "Doe",
+    "number" : "XXX-XXX-XXXX",
+    "num_messages" : "0"
+}
 ###
 
