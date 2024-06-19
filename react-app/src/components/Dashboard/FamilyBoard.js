@@ -1,6 +1,6 @@
-import AddCard from "./AddCard";
-import EmptyCard from "./EmptyCard";
-import PersonCard from "./PersonCard";
+import AddCard from "./Cards/AddCard";
+import EmptyCard from "./Cards/EmptyCard";
+import PersonCard from "./Cards/PersonCard";
 
 function FamilyBoard(props) {
     return (

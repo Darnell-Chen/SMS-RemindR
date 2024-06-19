@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UserCard from "./UserProfile";
 import FamilyBoard from "./FamilyBoard";
-import "../css/Dashboard.css"
+import "../css/Dashboard/Dashboard.css";
 
 function Dashboard() {
     const [data, setData] = useState(null);

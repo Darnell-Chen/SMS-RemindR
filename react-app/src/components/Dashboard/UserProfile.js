@@ -1,5 +1,3 @@
-import '../css/Dashboard.css';
-
 function userProfile(props) {
 
     const logoutSequence = () => {

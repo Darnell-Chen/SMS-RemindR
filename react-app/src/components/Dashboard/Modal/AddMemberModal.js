@@ -1,8 +1,12 @@
+import '../../css/Dashboard/Modal.css';
+import ModalBody from './ModalBody';
+
 function AddMemberModal(props) {
 
     return (
-        <>
+        <> 
             <div className="modal" tabIndex="-1" style={props.modalState ? { display:'block'} : {display : 'none'}}>
+
                 <div className="modal-dialog">
                     <div className="modal-content">
                     <div className="modal-header">
@@ -11,18 +15,7 @@ function AddMemberModal(props) {
                     </div>
 
 
-
-                    <div className="modal-body">
-                        <form>
-                            <div className="Person-Name-Div">
-                                <input name="fname" maxLength="20" placeholder="First Name" type="text"/>
-                                <input name="lname" maxLength="20" placeholder="Last Name" type="text"/>
-                            </div>
-
-                            <input name="telephone" placeholder="telephone" type="text"/>
-                        </form>
-                    </div>
-
+                    <ModalBody />
 
 
                     <div className="modal-footer">
