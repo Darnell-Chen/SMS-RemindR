@@ -46,10 +46,10 @@ router.get("/getData", authenticateToken, (req, res) => {
 router.post("/addMember", authenticateToken, (req, res) => {
     const user = {
         // how you get user email - use req.user.email to query for user
-        email: req.user.email
+        username: req.user.username
     }
 
-    const query = req.user.email;
+    const query = req.user.username;
 
     const newToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
     // TASK #1: Use user data to prepare JSON data to be added to the family array 

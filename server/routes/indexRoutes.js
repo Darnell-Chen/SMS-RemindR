@@ -15,6 +15,7 @@ const jwt = require("jsonwebtoken");
 const express = require('express');
 const router = express.Router();
 
+router.use(express.json());
 
 /************ Login Function *************/
 
@@ -31,9 +32,11 @@ router.post("/login", async (req, res) => {
 
 
     // this will be our jwt payload (typically defined as an JSON object)
+
+    console.log(req);
+
     const user = {
-        username: email,
-        password: password
+        username: email
     }
 
     const draft1_db = client.db('draft1');
@@ -118,28 +121,6 @@ router.post("/register", async (req, res) => {
         // be output as requested by Darnell.
     }
 })
-
-
-
-function authenticateToken(req, res) {
-    const authHeader = req.headers['authorization'];
-
-    // separating b/c the token will write "BEARER token", which we only need the token
-    const token = authHeader && authHeader.split(" ")[1];
-
-    if (token == null) {
-        return res.sendStatus(401);
-    }
-
-    // user here is the user object we passed in loginOperation()
-    jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
-        if (err) {
-            return res.sendStatus(403);
-        }
-
-        req.user = user;
-    });
-}
 
 
 module.exports = router;

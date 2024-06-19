@@ -6,6 +6,7 @@ const cors = require('cors')
 const indexRoutes = require('./routes/indexRoutes');
 const dashRoutes = require('./routes/dashRoutes');
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const json = require('body-parser/lib/types/json');
 // ^^ Note by Ardoine: I wanna delete this b/c its better if its
 // in the indexRoutes.js file instead.
 
