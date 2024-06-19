@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AddMember from "./AddMemberModal";
+import AddMember from "../Modal/AddMemberModal";
 
 function AddCard() {
     const [modal, setModal] = useState(false);
