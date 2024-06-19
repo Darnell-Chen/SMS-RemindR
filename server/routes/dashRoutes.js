@@ -2,8 +2,18 @@ require('dotenv').config();
 
 const jwt = require("jsonwebtoken");
 const express = require('express');
-
 const router = express.Router();
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+const uri = process.env.MONGODB_URI;
+
+const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  }) 
 
 
 /**************************** Route for Getting User Data *******************************/
@@ -42,6 +52,40 @@ router.post("/addMember", authenticateToken, (req, res) => {
     const query = req.user.email;
 
     const newToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
+    // TASK #1: Use user data to prepare JSON data to be added to the family array 
+    // that the current family member[aka the one who did request] has. This will require
+    // the use of the U in the CRUD acronym commands for mongodb. Also, keep in mind that 
+    // some of the commands may NOT transfer between mongosh and mongodb node driver.
+    // Questions that I have: 1) Is res the JSON data of new family member? 2) How to 
+    // derive token that references the person requested by user?
+    const database_id = client.db("draft1");
+    const col_accounts = database_id.collection('Accounts');
+    const count = col_accounts.countDocuments(user).then(() => {return col_accounts.countDocuments(user);});
+    try {
+        if(count == 0) {
+            throw Error;
+
+        } else {
+            arr = col_accounts.findOne({"username": user.email}).Family
+            arr.push(user /*Will insert JSON data referencing the person they want to add here*/)
+            col_accounts.updateOne({"username": ""/*will insert person requesting here via jwt token*/}
+                /*Insert the filter involving use of query operator that references the family members of the current requester.*/,
+                {"Family": arr}
+                /*Here, I will modify the family field in the document of JSON data referencing the requester[for lack of better words]*/
+            );
+        }
+        col_accounts.updateOne({"username": user.email},{$set: {authToken: newToken}});
+        //^^ Here, I add new token to the JSON document referenced by user.
+        userJSON = col_accounts.findOne({"username": user.email})
+        user.authToken = newToken;
+        res.status(200).json(userJSON)    
+    }catch(Error) {
+        console.log("Family member doesn't exist")
+        res.status(500).send("Member Addition Unsuccessful");
+
+    }
+    return ;
+    
 })
 
 
