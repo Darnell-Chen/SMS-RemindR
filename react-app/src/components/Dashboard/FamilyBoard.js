@@ -21,7 +21,7 @@ function FamilyBoard(props) {
 
                 <div className="row-4 Card-Rows">
                     <div className="col-4 Card-Cols">
-                        <AddCard/>
+                        <EmptyCard/>
                     </div>
                     <div className="col-4 Card-Cols">
                         <EmptyCard/>

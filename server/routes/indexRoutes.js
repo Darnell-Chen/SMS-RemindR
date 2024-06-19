@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
     try {
         if(count == 0) {
             // This means user daata is invalid.
-            throw Error;
+            res.status(500).send("Login Unsuccessful");
 
         } else {
                 console.log("Login Succesful");
@@ -54,7 +54,7 @@ router.post("/login", async (req, res) => {
 
     } catch(Error) {
         console.log("Login Unsuccessful");
-        res.status(500).send("Login Unsuccessful");
+        res.status(501).send("Login Unsuccessful");
     }
 })
 

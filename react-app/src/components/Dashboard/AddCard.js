@@ -1,8 +1,19 @@
+import { useState } from 'react';
+import AddMember from "./AddMemberModal";
+
 function AddCard() {
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = () => {
+        console.log(modal);
+        setModal(!modal);
+    }
+
     return (
         <>
-            <div className="Add-Card-Div">
-                <h1>+</h1>
+            <AddMember modalState={modal} setModal={setModal}/>
+            <div onClick={toggleModal} className="Add-Card-Div">
+                <p>+</p>
             </div>
         </>
     )

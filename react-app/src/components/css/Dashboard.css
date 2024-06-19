@@ -36,13 +36,30 @@
 }
 
 .Add-Card-Div {
-    justify-content: center;
-    text-align: center;
+    position: relative;
+    display: table;
     border-radius: 5%;
     width: 95%;
     height: 95%;
     box-sizing: border-box;
     box-shadow: 5px 5px 10px rgba(150, 148, 148, 0.301);
+    border-style: dashed solid;
+    border-color: white;
+    color: white;
+}
+
+.Add-Card-Div:hover {
+    scale: 1.03;
+    color: lightgray;
+    border-color: lightgray;
+    transition: all 0.2s ease-in-out;
+}
+
+.Add-Card-Div p {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 5cqw;
 }
 
 .Empty-Card {
