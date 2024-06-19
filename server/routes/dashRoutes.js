@@ -3,6 +3,8 @@ require('dotenv').config();
 const jwt = require("jsonwebtoken");
 const express = require('express');
 const router = express.Router();
+router.use(express.json())//<-- this is required for sending data from backend to frontend and 
+// vice versa
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const uri = process.env.MONGODB_URI;
@@ -43,10 +45,10 @@ router.get("/getData", authenticateToken, (req, res) => {
 
 /**************************** Route for Adding Family Members *******************************/
 
-router.post("/addMember", authenticateToken, (req, res) => {
+router.post("/addMember", authenticateToken, async (req, res) => {
     const user = {
         // how you get user email - use req.user.email to query for user
-        email: req.user.email
+        username: req.user.username
     }
 
     const query = req.user.email;
@@ -58,19 +60,28 @@ router.post("/addMember", authenticateToken, (req, res) => {
     // some of the commands may NOT transfer between mongosh and mongodb node driver.
     // Questions that I have: 1) Is res the JSON data of new family member? 2) How to 
     // derive token that references the person requested by user?
+    // Current status: Everything works fine, just need to implement functionality such that 
+    // req.body can be queried to add the desired member to currentMember[aka user's] family array. 
     const database_id = client.db("draft1");
     const col_accounts = database_id.collection('Accounts');
     const count = col_accounts.countDocuments(user).then(() => {return col_accounts.countDocuments(user);});
+    desiredMember = {/*JSON data referencing desiredMember will come from request*/};
     try {
         if(count == 0) {
+            console.log(count);
             throw Error;
 
         } else {
-            arr = col_accounts.findOne({"username": user.email}).Family
-            arr.push(user /*Will insert JSON data referencing the person they want to add here*/)
-            col_accounts.updateOne({"username": ""/*will insert person requesting here via jwt token*/}
+            arr = await col_accounts.findOne({"username": /*desiredMember*/user.username})
+            console.log(arr.Family)
+            console.log(req)
+            arr.Family.push(req.body);//<-- Pushes the JSON data referencing desiredUser.
+            console.log(arr.Family)
+            arr.push(/*desiredMember*/user /*Will insert JSON data referencing the person they want to add here*/)
+            console.log("Finished 12904930");
+            col_accounts.updateOne({"username": user.username/*will insert person requesting here via jwt token*/}
                 /*Insert the filter involving use of query operator that references the family members of the current requester.*/,
-                {"Family": arr}
+                {$set: {"Family": arr}}
                 /*Here, I will modify the family field in the document of JSON data referencing the requester[for lack of better words]*/
             );
         }
@@ -78,15 +89,19 @@ router.post("/addMember", authenticateToken, (req, res) => {
         //^^ Here, I add new token to the JSON document referenced by user.
         userJSON = col_accounts.findOne({"username": user.email})
         user.authToken = newToken;
+        console.log("Member Addition Successful")
         res.status(200).json(userJSON)    
     }catch(Error) {
-        console.log("Family member doesn't exist")
+        // console.log("Family member doesn't exist")
+        console.log("Account who requested request DNE");
         res.status(500).send("Member Addition Unsuccessful");
 
     }
-    return ;
+
+    // return ;
     
 })
+class familyMemberDNE extends Error {}
 
 
 
@@ -114,6 +129,7 @@ function authenticateToken(req, res, next) {
         // attaches user to the request so we can grab the user data
         // else, we can use jwt.decode to get the user object
         req.user = user;
+        console.log(req.user.username);
     });
 
     next();
