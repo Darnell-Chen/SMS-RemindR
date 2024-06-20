@@ -1,15 +1,6 @@
 require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
 
-const uri = process.env.MONGODB_URI;
-
-const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  }) 
+const connectToDatabase = require('../db');
 
 const jwt = require("jsonwebtoken");
 const express = require('express');
@@ -32,14 +23,11 @@ router.post("/login", async (req, res) => {
 
 
     // this will be our jwt payload (typically defined as an JSON object)
-
-    console.log(req);
-
     const user = {
         username: email
     }
 
-    const draft1_db = client.db('draft1');
+    const draft1_db = await connectToDatabase();
     coll_accounts = draft1_db.collection('Accounts');
     const count = await coll_accounts.countDocuments(user);
     
@@ -81,14 +69,14 @@ router.post("/register", async (req, res) => {
         telephone: telephone,
         first_name: fname,
         last_name: lname,
-        Family: []
+        Family: [],
+        familyCount: 0
         
         // Replicate JSON object with the 
         // JSON data representing the account.
     }
 
-    const database_id = 'draft1';
-    const draft1_db = client.db('draft1');
+    const draft1_db = await connectToDatabase();
     coll_accounts = draft1_db.collection('Accounts');
 
     arrOfAccounts = draft1_db.collection('Accounts').find();//<-- Returns all of the 

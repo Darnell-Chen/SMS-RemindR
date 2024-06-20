@@ -1,21 +1,24 @@
+.body-root {
+    overflow: hidden;
+}
+
 .Dashboard-Div {
     box-sizing: border-box;
     overflow: hidden;
     width: 100vw;
-    height: 92vh;
+    height: 92.7vh;
+    margin: 0px;
 }
 
 .Dashboard-Containers {
-    overflow: hidden;
-    padding: 5vh;
+    padding: 0px;
+    margin: 0px;
 }
 
 .User-Profile-Div {
     background-color: rgba(255, 255, 255, 0.712);
     box-sizing: border-box;
     overflow: hidden;
-    padding: 5vh;
-    border-radius: 3vh;
 }
 
 .UserCard-Container-Div {
@@ -23,7 +26,6 @@
     box-sizing: border-box;
     overflow: hidden;
     padding: 5vh;
-    border-radius: 3vh;
     height: 100%;
 }
 

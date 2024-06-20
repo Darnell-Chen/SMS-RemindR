@@ -12,26 +12,30 @@ function Login(props) {
         // as a multiform / default content-type
         const myData = new URLSearchParams(currForm).toString();
 
-        const response = await fetch('http://127.0.0.1:3001/login', {
-            method: 'POST',
-            body: myData,
-            headers: {
-                'Content-type': 'application/x-www-form-urlencoded',
+        try {
+            const response = await fetch('http://127.0.0.1:3001/login', {
+                method: 'POST',
+                body: myData,
+                headers: {
+                    'Content-type': 'application/x-www-form-urlencoded',
+                }
+            });
+    
+            if (response.ok) {
+                const tokens = await response.json();
+                
+                const { authToken, refreshToken } = tokens;
+    
+                // generally, it's advised to store refreshToken in http-only cookie, but this is just for a small project
+                localStorage.setItem("authToken", authToken);
+                localStorage.setItem("refreshToken", refreshToken);
+    
+                console.log("successful");
+    
+                navigate("/dashboard");
             }
-        });
-
-        if (response.ok) {
-            const tokens = await response.json();
-            
-            const { authToken, refreshToken } = tokens;
-
-            // generally, it's advised to store refreshToken in http-only cookie, but this is just for a small project
-            localStorage.setItem("authToken", authToken);
-            localStorage.setItem("refreshToken", refreshToken);
-
-            console.log("successful");
-
-            navigate("/dashboard");
+        } catch {
+            console.log("Server is down");
         }
     };
 

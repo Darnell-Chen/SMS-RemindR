@@ -6,6 +6,7 @@ import "../css/Dashboard/Dashboard.css";
 
 function Dashboard() {
     const [data, setData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     // generally, it's advised to store refreshToken in http-only cookie, but this is just for a small project
@@ -21,8 +22,6 @@ function Dashboard() {
             }
         });
 
-        console.log(response);
-
         if (!response.ok) {
             console.log("response not ok");
             throw new Error('Network response was not ok');
@@ -34,18 +33,27 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        if (localStorage.getItem("authToken") == null && localStorage.getItem("refreshToken") == null) {
+        if (localStorage.getItem("authToken") == null) {
             navigate("/");
         } else {
             const fetchData = async () => {
-                const result = await getData();
-                setData(result);
+                try {
+                    const result = await getData();
+                    setData(result);
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    setIsLoading(false); // Set loading to false once data is fetched
+                }
             }
             fetchData();
         }
-    }, [])  // using an empty use dependency so that it only runs on the initial render
+    }, []);  // we'll have an empty conditional render - so it only renders on initial load for now
 
-
+    // this will return first if it's loading, the we'll skip this when useState sets isLoading to false
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <>

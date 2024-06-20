@@ -18,3 +18,16 @@
     vertical-align: middle;
 }
 
+.modal-body input {
+    width: 100%;
+}
+
+.Person-Name-Div {
+    margin-bottom: 15px;
+}
+
+.Person-Name-Div input {
+    width: 100%;
+    margin: 5px 0px 0px 0px;
+}
+

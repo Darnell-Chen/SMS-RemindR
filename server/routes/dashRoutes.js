@@ -20,15 +20,17 @@ const client = new MongoClient(uri, {
 
 /**************************** Route for Getting User Data *******************************/
 
-router.get("/getData", authenticateToken, (req, res) => {
+router.get("/getData", authenticateToken, async (req, res) => {
 
     // we'll attach a new jwt access token that will have another 30 minutes of access using the same user object
     const user = {
         // how you get user email - use req.user.email to query for user
         email: req.user.email
     }
+
     const newToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
 
+    
     
     // then we fetch user info
     // then we return user info w/ new token
@@ -73,10 +75,7 @@ router.post("/addMember", authenticateToken, async (req, res) => {
 
         } else {
             arr = await col_accounts.findOne({"username": /*desiredMember*/user.username})
-            console.log(arr.Family)
-            console.log(req)
             arr.Family.push(req.body);//<-- Pushes the JSON data referencing desiredUser.
-            console.log(arr.Family)
             arr.push(/*desiredMember*/user /*Will insert JSON data referencing the person they want to add here*/)
             console.log("Finished 12904930");
             col_accounts.updateOne({"username": user.username/*will insert person requesting here via jwt token*/}

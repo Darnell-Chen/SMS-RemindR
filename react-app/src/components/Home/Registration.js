@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 
 function Registration(props) {
     return (
@@ -43,18 +42,23 @@ async function onRegister(e, props){
 
     console.log(currForm.get("fname"));
 
-    const response = await fetch('http://127.0.0.1:3001/register', {
-        method: 'POST',
-        body: myData,
-        headers: {
-            'Content-type': 'application/x-www-form-urlencoded',
+    try {
+        const response = await fetch('http://127.0.0.1:3001/register', {
+            method: 'POST',
+            body: myData,
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded',
+            }
+        });
+    
+        const serverResponse = await response.text();
+    
+        if (response.status === 201) {
+            console.log(serverResponse);
         }
-    });
 
-    const serverResponse = await response.text();
-
-    if (response.status === 201) {
-        console.log(serverResponse);
+    } catch {
+        console.log("Server is down");
     }
 }
 
