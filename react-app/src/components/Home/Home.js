@@ -6,6 +6,7 @@ import Registration from './Registration';
 function Home() {
     // we'll use this to decide whether to display login or register page
     const [myForm, setForm] = useState('Login');
+    const [displayedMsg, setMessage] = useState(null);
 
     return (
         <React.Fragment>
@@ -20,7 +21,7 @@ function Home() {
 
                         <div className="col right-side">
                             {/* we'll pass children as props to decide which form to use*/}
-                            {myForm === 'Registration' ? <Registration setForm={setForm}/> : <Login setForm={setForm}/>}
+                            {myForm === 'Registration' ? <Registration setForm={setForm} displayedMsg={displayedMsg} setMessage={setMessage}/> : <Login setForm={setForm} displayedMsg={displayedMsg} setMessage={setMessage}/>}
                         </div>
 
                     </div>

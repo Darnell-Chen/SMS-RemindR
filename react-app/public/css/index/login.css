@@ -76,3 +76,11 @@
     display: block;
     text-align: left;
 }
+
+.login-register-msg {
+    font-size: 1.5vh;
+    text-align: left;
+    padding: 0px;
+    margin: 0px;
+    font-weight: bold;
+}

@@ -5,6 +5,7 @@
     --loginButtonHover: rgb(101, 209, 55);
 }
 
+
 .registerForm {
     padding-left: 10vh;
     padding-right: 10vh;
@@ -89,4 +90,12 @@
     border: none;
     padding: 5px 5px 5px 5px;
     font-size: larger;
+}
+
+.login-register-msg {
+    font-size: 1.5vh;
+    text-align: left;
+    padding: 0px;
+    margin: 0px;
+    font-weight: bold;
 }

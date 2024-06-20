@@ -4,7 +4,7 @@ function Registration(props) {
     return (
         <>
             <h2>Registration</h2>
-            <form className="registerForm" id="registerForm" onSubmit={(e, props) => onRegister(e, props)}>
+            <form className="registerForm" id="registerForm" onSubmit={(e) => onRegister(e, props)}>
                 <div className="register-name-Div">
                     <input name="fname" maxLength="20" placeholder="First Name" type="text"/>
                     <input name="lname" maxLength="20" placeholder="Last Name" type="text"/>
@@ -19,13 +19,15 @@ function Registration(props) {
                     <input maxLength="25" placeholder="Re-Enter Password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
                 </div>
 
+                {(props.displayedMsg) ? <p className='login-register-msg'>{props.displayedMsg}</p> : <></>}
+
                 <div className="register-options-div">
-                    <a href="#" className="registerOption" onClick={() => props.setForm('Login')}>Already have an Account?</a>
+                    <a href="#" className="registerOption" onClick={() => changeForm(props)}>Already have an Account?</a>
                 </div>
 
                 <button className="RegisterButton" type="submit">Submit</button>
+
             </form>
-            <div id="afterSubmitted"></div>
         </>
     )
 }
@@ -51,15 +53,20 @@ async function onRegister(e, props){
             }
         });
     
-        const serverResponse = await response.text();
-    
-        if (response.status === 201) {
-            console.log(serverResponse);
+        if (response.ok) {
+            console.log("success1")
+            props.setMessage("Registration was Successful!");
+            props.setForm("Login");
         }
 
     } catch {
-        console.log("Server is down");
+        props.setMessage("Internal Server Error");
     }
+}
+
+function changeForm(props) {
+    props.setMessage(null);
+    props.setForm('Login');
 }
 
 

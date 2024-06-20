@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
@@ -33,9 +33,16 @@ function Login(props) {
                 console.log("successful");
     
                 navigate("/dashboard");
+
+            } else {
+
+                props.setMessage("Make sure your email and password are correct");
             }
+            
+
+
         } catch {
-            console.log("Server is down");
+            props.setMessage("Internal Server Error");
         }
     };
 
@@ -47,20 +54,27 @@ function Login(props) {
                 <input name="email" placeholder="Email" type="text"/>
                 <input name="password" placeholder="Password" type="text"/>
 
+                {(props.displayedMsg) ? <p className='login-register-msg'>{props.displayedMsg}</p> : <></>}
+
                 <div className="login-options-div">
                     <div>
                         <a href="#" className="loginOptions">Forgot Password?</a>
                     </div>
                     <div>
-                        <a href="#" className="loginOptions" onClick={() => {props.setForm('Registration')}}>Register Here</a>
+                        <a href="#" className="loginOptions" onClick={() => changeForm(props)}>Register Here</a>
                     </div>
                 </div>
 
-                    
                 <button className="loginButton" type="submit">Login</button>
+
             </form>
         </>
     )
+}
+
+function changeForm(props) {
+    props.setMessage(null);
+    props.setForm('Registration');
 }
 
 export default Login;
