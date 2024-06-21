@@ -1,22 +1,22 @@
-import React from 'react';
+import {useState, React} from 'react';
 
 function Registration(props) {
+
     return (
         <>
             <h2>Registration</h2>
             <form className="registerForm" id="registerForm" onSubmit={(e) => onRegister(e, props)}>
                 <div className="register-name-Div">
-                    <input name="fname" maxLength="20" placeholder="First Name" type="text"/>
-                    <input name="lname" maxLength="20" placeholder="Last Name" type="text"/>
+                    <input name="fname" maxLength="20" placeholder="First Name" type="text" pattern="^[a-zA-Z]+$"/>
+                    <input name="lname" maxLength="20" placeholder="Last Name" type="text" pattern="^[a-zA-Z]+$"/>
                 </div>
 
-
                 <input name="email" className="default-Inputs" placeholder="Email" maxLength="35" type="email"/>
-                <input name="telephone" className="default-Inputs" placeholder="Phone Number" maxLength="10" type="tel"/>
+                <input name="telephone" className="default-Inputs" placeholder="Phone Number" maxLength="10" type="tel" pattern="^\d{10}$"/>
 
                 <div className="register-password-Div">
-                    <input name="password" maxLength="25" placeholder="Password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
-                    <input maxLength="25" placeholder="Re-Enter Password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
+                    <input name="password" maxLength="25" placeholder="Password" type="password"/>
+                    <input name="password2" maxLength="25" placeholder="Confirm Password" type="password"/>
                 </div>
 
                 {(props.displayedMsg) ? <p className='login-register-msg'>{props.displayedMsg}</p> : <></>}
@@ -37,6 +37,16 @@ async function onRegister(e, props){
     e.preventDefault();
 
     const currForm = new FormData(e.currentTarget);
+
+    const pwPattern = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+    if (currForm.get("password") !== currForm.get("password2")) {
+        props.setMessage("Your passwords don't match");
+        return;
+    } else if ( !pwPattern.test(currForm.get("password")) ) {
+        props.setMessage("Password requires atleast 8 characters, an uppercase letter and a lowercase letter");
+        return;
+    }
 
     // for some reason, the formdata body isn't being recieved if I simply send the fetch request
     // as a multiform / default content-type

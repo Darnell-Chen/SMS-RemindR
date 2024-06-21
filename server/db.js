@@ -19,9 +19,14 @@ const connectToDatabase = async () => {
   if (db) {
     return db;
   }
-  await client.connect();
-  db = await client.db('draft1');
-  return db;
+
+  try {
+    await client.connect();
+    db = await client.db('draft1');
+    return db;
+  } catch {
+    console.log("error connecting to MongoDB in db.js");
+  }
 };
 
 module.exports = connectToDatabase;
