@@ -6,26 +6,30 @@
     box-sizing: border-box;
     overflow: hidden;
     width: 100vw;
-    height: 92.7vh;
     margin: 0px;
+    padding: 10px;
 }
 
 .Dashboard-Containers {
     padding: 0px;
-    margin: 0px;
+    box-sizing: border-box;
+
+    /***This is the padding around each container - not the padding around the whole dashboard**/
+    padding: 5px;
 }
 
 .User-Profile-Div {
-    background-color: rgba(255, 255, 255, 0.712);
     box-sizing: border-box;
     overflow: hidden;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .UserCard-Container-Div {
-    background-color: rgba(255, 255, 255, 0.712);
     box-sizing: border-box;
     overflow: hidden;
-    padding: 5vh;
     height: 100%;
 }
 
@@ -37,32 +41,6 @@
     height: 100%;
 }
 
-.Add-Card-Div {
-    position: relative;
-    display: table;
-    border-radius: 5%;
-    width: 95%;
-    height: 95%;
-    box-sizing: border-box;
-    box-shadow: 5px 5px 10px rgba(150, 148, 148, 0.301);
-    border-style: dashed solid;
-    border-color: white;
-    color: white;
-}
-
-.Add-Card-Div:hover {
-    scale: 1.03;
-    color: lightgray;
-    border-color: lightgray;
-    transition: all 0.2s ease-in-out;
-}
-
-.Add-Card-Div p {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 5cqw;
-}
 
 .Empty-Card {
     height: 100%;

@@ -1,5 +1,4 @@
 import AddCard from "./Cards/AddCard";
-import EmptyCard from "./Cards/EmptyCard";
 import PersonCard from "./Cards/PersonCard";
 import { useState, useEffect } from "react";
 
@@ -13,6 +12,7 @@ function FamilyBoard(props) {
         if (myData) {
             setCardCount(myData.familyCount);
             setFamilyData(myData.Family);
+            console.log("my family count: " + cardCount);
         }
     }, [props.cardData]); // React to changes in props.cardData
 
@@ -23,7 +23,7 @@ function FamilyBoard(props) {
 
                 <div className="col">
                     {familyData.map((member) => <PersonCard key={member.name} familyData={member}/>)}
-                    {(cardCount < 10) ? <AddCard /> : <EmptyCard/>}
+                    {(cardCount && cardCount < 10) ? <AddCard /> : <></>}
                 </div>
 
             </div>

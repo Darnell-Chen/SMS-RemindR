@@ -41,7 +41,6 @@ function Dashboard() {
                     const result = await getData();
                     const userInfo = await result.userInfo; // Ensure result.userInfo is fetched correctly
                     setData(userInfo);
-                    console.log(userInfo);
                 } catch (error) {
                     console.error(error);
                 } finally {

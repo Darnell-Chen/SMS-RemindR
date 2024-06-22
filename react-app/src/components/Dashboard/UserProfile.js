@@ -1,7 +1,8 @@
+import "../css/Dashboard/UserProfile.css"
+
 function UserProfile(props) {
 
     const logoutSequence = () => {
-        console.log("logout clicked");
         localStorage.clear();
         props.cardNav("/");
     }
@@ -24,7 +25,7 @@ function UserProfile(props) {
                 </div>
 
                 <div className="row">
-                    <button onClick={logoutSequence}>Logout</button>
+                    <button className="logoutButton" onClick={logoutSequence}>Logout</button>
                 </div>
             </div>
         </>
