@@ -67,6 +67,8 @@ router.post("/addMember", authenticateToken, async (req, res) => {
             "username": req.user.username
         }
 
+        console.log(req.body);
+
         // this will update the array with the new member
         const result = await col_accounts.updateOne(query, {$push: { Family: req.body}});
 
@@ -100,6 +102,7 @@ router.post("/addMember", authenticateToken, async (req, res) => {
 /************************ Checks if the user exists ***********************************/
 async function checkUserExist(req, col_accounts) {
     const count = await col_accounts.countDocuments({username: req.user.username});
+
     if (count !== 1) {
         return false;
     } else {
@@ -114,7 +117,7 @@ async function checkFamilyExist(req, col_accounts) {
     const query = {
         "username": req.user.username,
         "Family": {
-            $elemMatch: { name: 'John Doe' }
+            $elemMatch: { name: req.body.name }
         }
     };
 

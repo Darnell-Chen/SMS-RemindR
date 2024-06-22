@@ -1,4 +1,4 @@
-function userProfile(props) {
+function UserProfile(props) {
 
     const logoutSequence = () => {
         console.log("logout clicked");
@@ -6,19 +6,21 @@ function userProfile(props) {
         props.cardNav("/");
     }
 
+    const userInfo = props.cardData;
+
     return (
         <>
             <div className='User-Profile-Div'>
                 <div className="row">
-                    <h1>Hi <span className="Profile-Name">Darnell,</span></h1>
+                    <h1>Hi <span className="Profile-Name">{props.cardData.first_name + "!"}</span></h1>
 
                     <h2>Welcome to SMS-RemindR</h2>
-                    <h4> Telephone: 803-XXX-XXXX </h4>
-                    <h4> Email: fakeEmail@gmail.com </h4>
+                    
+                    <h4> Telephone: {props.cardData.telephone} </h4>
+                    <h4> Email: {props.cardData.username} </h4>
 
                     <h4> You currently have: </h4>
-                    <h5> 5 Family Members</h5>
-                    <h6> 1 daily SMS </h6>
+                    <h5> {props.cardData.familyCount} Family Members</h5>
                 </div>
 
                 <div className="row">
@@ -29,4 +31,4 @@ function userProfile(props) {
     )
 }
 
-export default userProfile;
+export default UserProfile;

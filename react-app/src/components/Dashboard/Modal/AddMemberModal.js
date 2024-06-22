@@ -3,7 +3,7 @@ import ModalBody from './ModalBody';
 
 function AddMemberModal(props) {
 
-    const saveMember = (e) => {
+    const saveMember = async (e) => {
         e.preventDefault();
 
         // we'll store the form data here
@@ -13,9 +13,20 @@ function AddMemberModal(props) {
         for (let [key, value] of newForm.entries()) {
             object[key] = value;
         }
+        
+        const addMemberResponse = await fetch('http://127.0.0.1:3001/addMember', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authToken"),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(object)
+        })
 
-        const formJSON = JSON.stringify(object);
-        console.log(formJSON);
+        if (addMemberResponse.ok) {
+            console.log("successfully added family member");
+        }
     }
 
     return (
@@ -37,7 +48,7 @@ function AddMemberModal(props) {
 
                             <div className="modal-footer">
                                 <button onClick={() => props.setModal(false)} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-primary">Add</button>
+                                <button type="submit" className="btn btn-primary">Next</button>
                             </div>
 
                         </form>

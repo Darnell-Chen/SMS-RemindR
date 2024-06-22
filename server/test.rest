@@ -21,12 +21,11 @@ email=test@gmail.com&password=testPassword&action=login
 POST http://localhost:3001/addMember
 Content-Type: application/json
 Referer: http://localhost:3000/
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzE5MDIzMDEwLCJleHAiOjE3MTkwMjQ4MTB9.KpzUhKX9syyQJRF226HUAg9WRKVR7_PdbfjhHwy4H0s
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzE5MDI4ODQzLCJleHAiOjE3MTkwMzA2NDN9.SGLHxaVtPgAGwK5dnjBpnmzp911LeHErhelsb6mGfeg
 
 {
     "name" : "John Doe",
-    "number" : "XXX-XXX-XXXX",
-    "num_messages" : "0"
+    "number" : "XXX-XXX-XXXX"
 }
 ###
 

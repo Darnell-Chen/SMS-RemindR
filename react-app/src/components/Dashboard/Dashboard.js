@@ -24,11 +24,11 @@ function Dashboard() {
 
         if (!response.ok) {
             console.log("response not ok");
-            throw new Error('Network response was not ok');
+            navigate("/");
 
         } else {
-            console.log(response);
-            return response.json();
+            const fetchResponse = await response.json();
+            return fetchResponse;
         }
     }
 
@@ -39,7 +39,9 @@ function Dashboard() {
             const fetchData = async () => {
                 try {
                     const result = await getData();
-                    setData(result);
+                    const userInfo = await result.userInfo; // Ensure result.userInfo is fetched correctly
+                    setData(userInfo);
+                    console.log(userInfo);
                 } catch (error) {
                     console.error(error);
                 } finally {
