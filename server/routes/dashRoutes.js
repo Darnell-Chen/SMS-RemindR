@@ -1,46 +1,39 @@
 require('dotenv').config();
 
+const connectToDatabase = require('../db');
 const jwt = require("jsonwebtoken");
 const express = require('express');
 const router = express.Router();
-router.use(express.json())//<-- this is required for sending data from backend to frontend and 
-// vice versa
-const { MongoClient, ServerApiVersion } = require('mongodb');
-
-const uri = process.env.MONGODB_URI;
-
-const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  }) 
+router.use(express.json())//<-- this is required for sending data from backend to frontend and vice versa
 
 
 /**************************** Route for Getting User Data *******************************/
 
 router.get("/getData", authenticateToken, async (req, res) => {
+    const db = await connectToDatabase();
+    const col_accounts = db.collection('Accounts');
 
-    // we'll attach a new jwt access token that will have another 30 minutes of access using the same user object
-    const user = {
-        // how you get user email - use req.user.email to query for user
-        email: req.user.email
+    const userExist = checkUserExist(req, col_accounts);
+    if (!userExist) {
+        res.status(404);
+        return;
     }
 
-    const newToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
-
+    try {
+        const userInfo = await col_accounts.findOne({username: req.user.username});
+        if (!userInfo) {
+            throw new Error("Error fetching user data from MongoDB");
+        }
+        
+        res.status(200).json({
+            authToken: genToken(req),
+            userInfo: userInfo
+        });
+    } catch (e) {
+        console.error(e);
+        res.sendStatus(404);
+    }
     
-    
-    // then we fetch user info
-    // then we return user info w/ new token
-    res.status(200).json({
-        authToken: newToken,
-        fname: "Darnell",
-        lname: "Chen",
-        familyCount: 0,
-        messageCount: 0
-    });
 })
 
 
@@ -48,62 +41,92 @@ router.get("/getData", authenticateToken, async (req, res) => {
 /**************************** Route for Adding Family Members *******************************/
 
 router.post("/addMember", authenticateToken, async (req, res) => {
-    const user = {
-        // how you get user email - use req.user.email to query for user
-        username: req.user.username
+
+
+    const db = await connectToDatabase();
+    const col_accounts = db.collection('Accounts');
+
+    // this will automatically return status not okay if the user doesn't exist
+    const userExist = await checkUserExist(req, col_accounts);
+    if (!userExist) {
+        res.sendStatus(404);
+        return;
     }
 
-    const query = req.user.username;
+    // we'll first check if the family member already exists in array
+    const familyExist = await checkFamilyExist(req, col_accounts);
+    if (!familyExist) {
+        res.sendStatus(404);
+        return;
+    }
 
-    const newToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
-    // TASK #1: Use user data to prepare JSON data to be added to the family array 
-    // that the current family member[aka the one who did request] has. This will require
-    // the use of the U in the CRUD acronym commands for mongodb. Also, keep in mind that 
-    // some of the commands may NOT transfer between mongosh and mongodb node driver.
-    // Questions that I have: 1) Is res the JSON data of new family member? 2) How to 
-    // derive token that references the person requested by user?
-    // Current status: Everything works fine, just need to implement functionality such that 
-    // req.body can be queried to add the desired member to currentMember[aka user's] family array. 
-    const database_id = client.db("draft1");
-    const col_accounts = database_id.collection('Accounts');
-    const count = col_accounts.countDocuments(user).then(() => {return col_accounts.countDocuments(user);});
-    desiredMember = {/*JSON data referencing desiredMember will come from request*/};
     try {
-        if(count == 0) {
-            console.log(count);
-            throw Error;
 
-        } else {
-            arr = await col_accounts.findOne({"username": /*desiredMember*/user.username})
-            arr.Family.push(req.body);//<-- Pushes the JSON data referencing desiredUser.
-            arr.push(/*desiredMember*/user /*Will insert JSON data referencing the person they want to add here*/)
-            console.log("Finished 12904930");
-            col_accounts.updateOne({"username": user.username/*will insert person requesting here via jwt token*/}
-                /*Insert the filter involving use of query operator that references the family members of the current requester.*/,
-                {$set: {"Family": arr}}
-                /*Here, I will modify the family field in the document of JSON data referencing the requester[for lack of better words]*/
-            );
+        // the query and action for adding the family member to the array of Family
+        const query = {
+            "username": req.user.username
         }
-        col_accounts.updateOne({"username": user.email},{$set: {authToken: newToken}});
-        //^^ Here, I add new token to the JSON document referenced by user.
-        userJSON = col_accounts.findOne({"username": user.email})
-        user.authToken = newToken;
-        console.log("Member Addition Successful")
-        res.status(200).json(userJSON)    
+
+        // this will update the array with the new member
+        const result = await col_accounts.updateOne(query, {$push: { Family: req.body}});
+
+
+        // check that it was a success
+        if (result.modifiedCount !== 1) {
+            res.sendStatus(404);
+            return;
+        }
+
+        const increaseFamily = await col_accounts.updateOne(query, {$inc: {familyCount: 1}});
+        if (increaseFamily.modifiedCount !== 1) {
+            res.sendStatus(404);
+            return;
+        }
+
+        res.sendStatus(200);
+        console.log("successfully added member to family for " + req.user.username);
+
     }catch(Error) {
         // console.log("Family member doesn't exist")
-        console.log("Account who requested request DNE");
+        console.log("Problem Adding Member");
         res.status(500).send("Member Addition Unsuccessful");
-
     }
 
     // return ;
     
 })
-class familyMemberDNE extends Error {}
+
+
+/************************ Checks if the user exists ***********************************/
+async function checkUserExist(req, col_accounts) {
+    const count = await col_accounts.countDocuments({username: req.user.username});
+    if (count !== 1) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 
 
+/************** Checks if the added individual already exists in our array ************/
+async function checkFamilyExist(req, col_accounts) {
+    const query = {
+        "username": req.user.username,
+        "Family": {
+            $elemMatch: { name: 'John Doe' }
+        }
+    };
+
+    const exist = await col_accounts.findOne(query);
+
+    if (exist) {
+        console.log("This individual already exists in the User's Family");
+        return false;
+    } else {
+        return true;
+    }
+}
 
 
 
@@ -116,22 +139,39 @@ function authenticateToken(req, res, next) {
     const token = authToken && authToken.split(" ")[1];
 
     if (token == null) {
+        console.log("TOKEN IS NULL - check if token has bearer");
         return res.sendStatus(403);
     }
 
     // user here is the user/email object we passed in loginOperation()
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
         if (err) {
+            console.log("ERROR IN VERTIFICATION");
             return res.sendStatus(403);
         }
 
         // attaches user to the request so we can grab the user data
         // else, we can use jwt.decode to get the user object
         req.user = user;
-        console.log(req.user.username);
-    });
 
-    next();
+        console.log(req.user);
+
+        // since jwt.verify is async, we have to place next() inside of the function to finish up this function first
+        next();
+    });
+}
+
+/***************************** Generated New Auth Token ****************************/
+
+
+function genToken(req) {
+    const user = {
+        // how you get user email - use req.user.email to query for user
+        username: req.user.username
+    }
+
+    const newToken = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn: 60 * 30});
+    return newToken;
 }
 
 module.exports = router;

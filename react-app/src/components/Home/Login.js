@@ -24,11 +24,10 @@ function Login(props) {
             if (response.ok) {
                 const tokens = await response.json();
                 
-                const { authToken, refreshToken } = tokens;
+                const { authToken } = tokens;
     
                 // generally, it's advised to store refreshToken in http-only cookie, but this is just for a small project
                 localStorage.setItem("authToken", authToken);
-                localStorage.setItem("refreshToken", refreshToken);
     
                 console.log("successful");
     

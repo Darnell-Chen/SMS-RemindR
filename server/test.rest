@@ -21,26 +21,18 @@ email=test@gmail.com&password=testPassword&action=login
 POST http://localhost:3001/addMember
 Content-Type: application/json
 Referer: http://localhost:3000/
-Authorization: bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzE4NzY2OTAyLCJleHAiOjE3MTg3Njg3MDJ9.KZQznVE4aUr7fzpRG7gNuMO4znKumc7qQT23sg6Z6ys
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzE5MDIzMDEwLCJleHAiOjE3MTkwMjQ4MTB9.KpzUhKX9syyQJRF226HUAg9WRKVR7_PdbfjhHwy4H0s
 
 {
-    "authToken" : "lear oiwdhfjiouqewhjr8u1h32iuon324892374u923ij",
-    "fname" : "John",
-    "lname" : "Doe",
+    "name" : "John Doe",
     "number" : "XXX-XXX-XXXX",
     "num_messages" : "0"
 }
 ###
-POST http://localhost:3001/addMember
+
+GET http://localhost:3001/getData
 Content-Type: application/json
 Referer: http://localhost:3000/
-Authorization: bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzE4NzY2OTAyLCJleHAiOjE3MTg3Njg3MDJ9.KZQznVE4aUr7fzpRG7gNuMO4znKumc7qQT23sg6Z6ys
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzE5MDIyOTU0LCJleHAiOjE3MTkwMjQ3NTR9.3ygU-q6B9KR6gcrq4zed2sf2CnAHz3i9DHfC0HjOCN4
 
-{  
-    "fname" : "John",
-    "lname" : "Doe",
-    "number" : "XXX-XXX-XXXX",
-    "num_messages" : "0"
-}
-###
-
+{}
