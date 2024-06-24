@@ -1,13 +1,6 @@
 import "../../css/Dashboard/PersonCard.css"
 
 function PersonCard(props) {
-    // checks if the info is null, which basically means the user hasn't added anyone yet
-    // Also means useState is currently just [null] for family data
-    if (props.familyData.name == null) {
-        return (<></>);
-    }
-
-    console.log(props);
 
     return (
         <>

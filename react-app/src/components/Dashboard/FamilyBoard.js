@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 function FamilyBoard(props) {
     const [cardCount, setCardCount] = useState(0);
-    const [familyData, setFamilyData] = useState([{name: null}]);
+    const [familyData, setFamilyData] = useState([]);
 
     const myData = props.cardData;
 

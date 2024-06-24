@@ -12,11 +12,13 @@
     vertical-align: middle;
     margin-right: -4px;
 }
-    .modal-dialog {
+.modal-dialog {
     display: inline-block;
     text-align: left;
     vertical-align: middle;
 }
+
+/*    ^^^ centering ^^^     */
 
 .modal-body input {
     width: 100%;
@@ -31,3 +33,12 @@
     margin: 5px 0px 0px 0px;
 }
 
+/************* This is for the second Modal Form **************/
+
+.modal-body-second {
+    padding: 5px;
+}
+
+.modal-body-second input{
+    width: 100%;
+}

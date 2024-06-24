@@ -11,10 +11,13 @@ function AddMessage() {
     if (currMessage == null) {
         return (
             <>
-                <input type="text" placeholder='Add Message'/>
+                <input type="text" placeholder='Your Message'/>
                 <input type="time"/>
+                <div></div>
                 <button>Add</button>
             </>
         )
     }
 }
+
+export default AddMessage;
