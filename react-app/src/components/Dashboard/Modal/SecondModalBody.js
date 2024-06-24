@@ -8,8 +8,9 @@ function SecondModalBody() {
     return(
         <>
             <div className="modal-body-second">
-                {currMessages.map((message) => <AddMessage myMessage={member}/>)}
-                {/* <AddMessage /> */}
+                {currMessages.map((message) => <AddMessage myMessage={message}/>)}
+                {/* We'll do Add Message if currMessages.size() < 10 */}
+                {currMessages.length < 10 ? <AddMessage/> : <></>}
             </div>
         </>
     )

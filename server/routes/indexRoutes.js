@@ -29,7 +29,7 @@ router.post("/login", async (req, res) => {
 
     const draft1_db = await connectToDatabase();
     coll_accounts = draft1_db.collection('Accounts');
-    const count = await coll_accounts.countDocuments(user);
+    const count = await coll_accounts.countDocuments({username: email, password: password});
     
     try {
         if(count == 0) {

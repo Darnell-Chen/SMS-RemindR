@@ -18,19 +18,32 @@
     padding: 5px;
 }
 
+/************* This is the wrapper for the User Info (Left Side)*************/
 .User-Profile-Div {
+    max-height: 90vh;
     box-sizing: border-box;
     overflow: hidden;
-    height: 100%;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     padding: 10px;
 }
 
+/******* This is the Family Card Section (Right Side)******/
+@media all and (max-width: 569px) {
+    .UserCard-Container-Div {
+        max-height: none;
+    }
+  }
+
+@media all and (min-width: 570px) {
+    .UserCard-Container-Div {
+        max-height: 89.5vh;
+        overflow-y: scroll;
+    }
+}
+
 .UserCard-Container-Div {
     box-sizing: border-box;
-    overflow: hidden;
-    height: 100%;
 }
 
 .Card-Rows {
@@ -46,3 +59,17 @@
     height: 100%;
     width: 100%;
 }
+
+
+/******** How scrollbar looks ********/
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: green;
+    background-clip: content-box;
+    border: 5px solid transparent;
+}
+

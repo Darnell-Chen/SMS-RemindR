@@ -1,23 +1,24 @@
-import {useState} from 'react';
+import { useRef } from 'react';
 
 function AddMessage() {
+    const message = useRef("");
 
-    // I'll probably add a statement that checks if a prop exists
-    // if the props exist w/ values, then we'll use that value instead
-    // something like: if(props.stateExist) then useState(prop) else useState(null)
-    // option 2: we store the individual persons and messages as json in local storage
-    const [currMessage, setMessage] = useState(null);
+    const nextMessage = () => {
+        console.log(message.current);
+    };
 
-    if (currMessage == null) {
-        return (
-            <>
-                <input type="text" placeholder='Your Message'/>
-                <input type="time"/>
-                <div></div>
-                <button>Add</button>
-            </>
-        )
-    }
+    return (
+        <>
+            <input 
+                type="text" 
+                placeholder="Your Message" 
+                onChange={(e) => {message.current = e.target.value}} 
+            />
+            <input type="time" />
+            <div></div>
+            <button type="button" onClick={nextMessage}>Add</button>
+        </>
+    );
 }
 
 export default AddMessage;
