@@ -19,9 +19,6 @@ function UserProfile(props) {
                     
                     <h4> Telephone: {props.cardData.telephone} </h4>
                     <h4> Email: {props.cardData.username} </h4>
-
-                    <h4> You currently have: </h4>
-                    <h5> {props.cardData.familyCount} Family Members</h5>
                 </div>
 
                 <div className="row">

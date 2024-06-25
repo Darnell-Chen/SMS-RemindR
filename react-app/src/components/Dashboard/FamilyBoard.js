@@ -22,8 +22,8 @@ function FamilyBoard(props) {
             <div className="UserCard-Container-Div">
 
                 <div className="col">
-                    {familyData.map((member) => <PersonCard key={member.name} familyData={member}/>)}
-                    {(cardCount && cardCount < 10) ? <AddCard /> : <></>}
+                    {familyData.map((member) => <PersonCard setFamilyData={setFamilyData} familyData={familyData} key={member.name} memberData={member}/>)}
+                    {(cardCount < 10) ? <AddCard /> : <></>}
                 </div>
 
             </div>
