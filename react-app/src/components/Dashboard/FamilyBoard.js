@@ -23,7 +23,7 @@ function FamilyBoard(props) {
 
                 <div className="col">
                     {familyData.map((member) => <PersonCard setFamilyData={setFamilyData} familyData={familyData} key={member.name} memberData={member}/>)}
-                    {(cardCount < 10) ? <AddCard /> : <></>}
+                    {(cardCount < 10) ? <AddCard setFamilyData={setFamilyData} familyData={familyData}/> : <></>}
                 </div>
 
             </div>
