@@ -1,7 +1,12 @@
 import '../../css/Dashboard/Modal.css';
-import ModalBody from './ModalBody';
+import FirstModalBody from './FirstModalBody';
+
+import {useState} from 'react';
+import SecondModalBody from './SecondModalBody';
 
 function AddMemberModal(props) {
+    // this will decide whether we're on first modal - which adds member - or seconds modal, which adds its messages
+    const [modalState, setModalState] = useState('firstModal');
 
     const saveMember = async (e) => {
         e.preventDefault();
@@ -25,7 +30,7 @@ function AddMemberModal(props) {
         })
 
         if (addMemberResponse.ok) {
-            console.log("successfully added family member");
+            setModalState("secondModal");
         }
     }
 
@@ -36,7 +41,8 @@ function AddMemberModal(props) {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Add New Person</h5>
+                            <h5 className="modal-title">{modalState === "secondModal" ? "Add Messages" : "Add New Recipient"}</h5>
+                            
                             <button type="button" onClick={() => props.setModal(false)} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
@@ -44,11 +50,11 @@ function AddMemberModal(props) {
                         <form onSubmit={saveMember}>
 
                             {/*** This is the body that contains the actual form***/}
-                            <ModalBody />
+                            {modalState === "secondModal" ? <SecondModalBody /> : <FirstModalBody />}
 
                             <div className="modal-footer">
                                 <button onClick={() => props.setModal(false)} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-primary">Next</button>
+                                <button type="submit" className="btn btn-primary"> {modalState === "secondModal" ? "Save" : "Next"} </button>
                             </div>
 
                         </form>

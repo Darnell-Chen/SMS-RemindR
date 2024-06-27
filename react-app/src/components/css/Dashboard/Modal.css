@@ -1,3 +1,11 @@
+:root {
+    --baseGreen: rgb(96, 221, 87);
+    --baseGreen2: rgb(45, 133, 45);
+    --darkHighlight: rgb(13, 65, 20);
+    --bodyGreen: rgb(192, 243, 192);
+    --white: #ffffff;
+  }
+
 
 /* This part just centers the modal */
 .modal {
@@ -10,13 +18,39 @@
     display: inline-block;
     height: 100%;
     vertical-align: middle;
-    margin-right: -4px;
 }
-    .modal-dialog {
+.modal-dialog {
     display: inline-block;
     text-align: left;
     vertical-align: middle;
 }
+
+.modal-content {
+    background-color: var(--bodyGreen);
+    padding: 10px;
+}
+
+/********** Styling for Both Modal Bodies (Go lower for individual bodies) ************/
+.modal input {
+    border: none;
+}
+
+.modal textarea {
+    width: 100%;
+    border: none;
+}
+
+/**** This is the Header that says 'Add Messages' or 'Add Member' ****/
+.modal-header {
+    color: var(--darkHighlight);
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--baseGreen2);
+}
+
+/*    ^^^ centering ^^^     */
 
 .modal-body input {
     width: 100%;
@@ -31,3 +65,27 @@
     margin: 5px 0px 0px 0px;
 }
 
+/************* This is for the second Modal Form **************/
+
+.modal-body-second {
+    padding: 5px;
+}
+
+.modal-body-second input{
+    width: 100%;
+    margin: 5px 0px 5px 0px;
+}
+
+.modal-body-second button{
+    padding: 0px 5px 0px 5px;
+    margin-top: 5px;
+    border: 3px var(--baseGreen) solid;
+    background-color: var(--baseGreen);
+    color: white;
+    border-radius:15%;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+}

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 function FamilyBoard(props) {
     const [cardCount, setCardCount] = useState(0);
-    const [familyData, setFamilyData] = useState([{name: null}]);
+    const [familyData, setFamilyData] = useState([]);
 
     const myData = props.cardData;
 
@@ -22,8 +22,8 @@ function FamilyBoard(props) {
             <div className="UserCard-Container-Div">
 
                 <div className="col">
-                    {familyData.map((member) => <PersonCard key={member.name} familyData={member}/>)}
-                    {(cardCount && cardCount < 10) ? <AddCard /> : <></>}
+                    {familyData.map((member) => <PersonCard setFamilyData={setFamilyData} familyData={familyData} key={member.name} memberData={member}/>)}
+                    {(cardCount < 10) ? <AddCard setFamilyData={setFamilyData} familyData={familyData}/> : <></>}
                 </div>
 
             </div>

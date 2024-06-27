@@ -4,7 +4,8 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors') 
 const indexRoutes = require('./routes/indexRoutes');
-const dashRoutes = require('./routes/dashRoutes');
+const addFamilyRoute = require('./routes/addFamilyRoute');
+const deleteFamilyRoute = require('./routes/deleteFamilyRoute');
 const json = require('body-parser/lib/types/json');
 // ^^ Note by Ardoine: I wanna delete this b/c its better if its
 // in the indexRoutes.js file instead.
@@ -41,4 +42,5 @@ app.listen(port, () => {
 // this is the routes for all fetch requests from the index page (from front-end)
 // as well as all fetch requests from dashboard
 app.use(indexRoutes);
-app.use(dashRoutes);
+app.use(addFamilyRoute);
+app.use(deleteFamilyRoute);
