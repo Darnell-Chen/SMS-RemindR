@@ -1,6 +1,6 @@
-import "../../css/Dashboard/PersonCard.css"
+import "../../css/Dashboard/MessageCard.css"
 
-function PersonCard(props) {
+function MessageCard(props) {
 
     const deleteUser = async () => {
 
@@ -41,4 +41,4 @@ function PersonCard(props) {
     )
 }
 
-export default PersonCard;
+export default MessageCard;

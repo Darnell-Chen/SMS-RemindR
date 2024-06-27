@@ -27,7 +27,7 @@
 
 .modal-content {
     background-color: var(--bodyGreen);
-    padding: 10px;
+    padding: 5px;
 }
 
 /********** Styling for Both Modal Bodies (Go lower for individual bodies) ************/
@@ -44,6 +44,11 @@
 .modal-header {
     color: var(--darkHighlight);
     border: none;
+    margin-bottom: none;
+}
+
+.modal-footer {
+    border: none;
 }
 
 .btn-primary {
@@ -54,36 +59,59 @@
 
 .modal-body input {
     width: 100%;
+    margin-bottom: 5px;
 }
 
-.Person-Name-Div {
-    margin-bottom: 15px;
+.modal-body input[type="radio"]{
+    width: auto;
 }
 
-.Person-Name-Div input {
-    width: 100%;
+.radioHeading {
+    margin-top: 10px;
+}
+
+.modal-body textarea{
     margin: 5px 0px 0px 0px;
 }
 
-/************* This is for the second Modal Form **************/
-
-.modal-body-second {
-    padding: 5px;
-}
-
-.modal-body-second input{
+.msgType {
+    display: flex;
     width: 100%;
-    margin: 5px 0px 5px 0px;
+    gap: 2em;
 }
 
-.modal-body-second button{
-    padding: 0px 5px 0px 5px;
-    margin-top: 5px;
-    border: 3px var(--baseGreen) solid;
-    background-color: var(--baseGreen);
-    color: white;
-    border-radius:15%;
+.frequencyDiv {
+    display: flex;
+    width: 100%;
+    gap: 2em;
 }
+
+.select-week  input{
+    display: none;
+}
+  
+.select-week label {
+    display: inline-block;
+    text-align: center;
+    border: 2px solid white;
+    cursor: pointer;
+    width: 14.2856%;
+    height: 100%;
+    padding: 3px 0px 3px 0px;
+    margin-bottom: 5px;
+}
+  
+#mon:checked ~ label[for="mon"],
+#tue:checked ~ label[for="tue"],
+#wed:checked ~ label[for="wed"],
+#thu:checked ~ label[for="thu"],
+#fri:checked ~ label[for="fri"],
+#sat:checked ~ label[for="sat"],
+#sun:checked ~ label[for="sun"] {
+    background: var(--baseGreen2);
+    color: #ffffff;
+}
+
 
 .divider {
     width: 100%;

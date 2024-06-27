@@ -52,7 +52,7 @@ router.post("/addMember", authenticateToken, checkUserExist, checkFamilyExist, a
         console.log(req.body);
 
         // this will update the array with the new member
-        const result = await col_accounts.updateOne(query, {$push: { Family: req.body}});
+        const result = await col_accounts.updateOne(query, {$push: { Messages: req.body}});
 
 
         // check that it was a success
@@ -61,7 +61,7 @@ router.post("/addMember", authenticateToken, checkUserExist, checkFamilyExist, a
             return;
         }
 
-        const increaseFamily = await col_accounts.updateOne(query, {$inc: {familyCount: 1}});
+        const increaseFamily = await col_accounts.updateOne(query, {$inc: {messageCount: 1}});
         if (increaseFamily.modifiedCount !== 1) {
             res.sendStatus(404);
             return;

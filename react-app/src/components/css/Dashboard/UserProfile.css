@@ -1,4 +1,47 @@
-.logoutButton {
-    width: 50%;
-    margin: 0 auto;
+:root {
+    --baseGreen: rgb(96, 221, 87);
+    --baseGreen2: rgb(45, 133, 45);
+    --darkHighlight: rgb(13, 65, 20);
+    --bodyGreen: rgb(192, 243, 192);
+    --white: #ffffff;
+  }
+
+
+.User-Profile-Div {
+    margin: 0px;
+    box-shadow: 2px 2px 25px var(--baseGreen2);
+}
+
+.logoutDiv {
+    display: flex;
+    align-items: center;
+}
+
+.logoutDiv button {
+    background-color: var(--baseGreen2);
+    color: white;
+    border: 5px solid var(--baseGreen2);
+    border-radius: 5px;
+}
+
+.logoutDiv button:hover {
+    transition: all 0.2s ease-in;
+    background-color: var(--darkHighlight);
+    border: 5px solid var(--darkHighlight);
+}
+
+@media all and (max-width: 768px) {
+    .logoutDiv {
+        justify-content: center;
+    }
+
+    .logoutDiv button{
+        width: 50%;
+    }
+  }
+
+@media all and (min-width: 768px) {
+    .logoutDiv {
+        justify-content: flex-end;
+    }
 }

@@ -1,5 +1,5 @@
 .body-root {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .Dashboard-Div {
@@ -38,12 +38,14 @@
 @media all and (min-width: 570px) {
     .UserCard-Container-Div {
         max-height: 89.5vh;
-        overflow-y: scroll;
     }
 }
 
 .UserCard-Container-Div {
     box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
 }
 
 .Card-Rows {

@@ -11,17 +11,20 @@ function UserProfile(props) {
 
     return (
         <>
-            <div className='User-Profile-Div'>
-                <div className="row">
-                    <h1>Hi <span className="Profile-Name">{props.cardData.first_name + "!"}</span></h1>
-
-                    <h2>Welcome to SMS-RemindR</h2>
-                    
+            <div className='User-Profile-Div row'>
+                <div className="col-md-5">
+                    <h5>Welcome to SMS-RemindR</h5>
+                    <h5>User: <span className="Profile-Name">{props.cardData.first_name + " " + props.cardData.last_name}</span></h5>
+{/*                     
                     <h4> Telephone: {props.cardData.telephone} </h4>
-                    <h4> Email: {props.cardData.username} </h4>
+                    <h4> Email: {props.cardData.username} </h4> */}
                 </div>
 
-                <div className="row">
+                <div className="user-Info-Div col-md-5">
+
+                </div>
+
+                <div className="logoutDiv col-md-2">
                     <button className="logoutButton" onClick={logoutSequence}>Logout</button>
                 </div>
             </div>

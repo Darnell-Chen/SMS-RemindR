@@ -2,7 +2,7 @@ import { useState } from 'react';
 import "../../css/Dashboard/AddCard.css";
 
  /******** AddMember refers to the pop-up modal *********/
-import AddMember from "../Modal/AddMemberModal";
+import AddMessage from "../Modal/AddMessageModal";
 
 function AddCard() {
     const [modal, setModal] = useState(false);
@@ -14,7 +14,7 @@ function AddCard() {
     /******** AddMember refers to the pop-up modal *********/
     return (
         <>
-            <AddMember modalState={modal} setModal={setModal}/>
+            {(modal) ? <AddMessage toggleModal={toggleModal}/> : null}
             <div onClick={toggleModal} className="Add-Card-Div">
                 <p>+</p>
             </div>

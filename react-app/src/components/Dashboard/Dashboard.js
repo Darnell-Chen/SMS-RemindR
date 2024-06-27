@@ -58,11 +58,11 @@ function Dashboard() {
 
     return (
         <>
-            <div className="Dashboard-Div row">
-                <div className="Dashboard-Containers col-sm-4">
+            <div className="Dashboard-Div col">
+                <div className="Dashboard-Containers row-1">
                     <UserCard cardData={data} cardNav={navigate}/>
                 </div>
-                <div className="Dashboard-Containers col-sm-8">
+                <div className="Dashboard-Containers row-10">
                     <FamilyBoard cardData={data}/>
                 </div>
             </div>
