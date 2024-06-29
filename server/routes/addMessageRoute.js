@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 router.use(express.json())//<-- this is required for sending data from backend to frontend and vice versa
 
-const {checkUserExist, checkFamilyExist, authenticateToken, genToken} = require("./defaultMethods");
+const {checkUserExist, checkMessageExist, authenticateToken, genToken} = require("./defaultMethods");
 
 
 /**************************** Route for Getting User Data *******************************/
@@ -36,7 +36,7 @@ router.get("/getData", authenticateToken, checkUserExist, async (req, res) => {
 
 /**************************** Route for Adding Family Members *******************************/
 
-router.post("/addMember", authenticateToken, checkUserExist, checkFamilyExist, async (req, res) => {
+router.post("/addMember", authenticateToken, checkUserExist, checkMessageExist, async (req, res) => {
 
 
     const db = await connectToDatabase();
@@ -44,7 +44,7 @@ router.post("/addMember", authenticateToken, checkUserExist, checkFamilyExist, a
 
     try {
 
-        // the query and action for adding the family member to the array of Family
+        // the query and action for adding the message to Message Array
         const query = {
             "username": req.user.username
         }
@@ -61,19 +61,19 @@ router.post("/addMember", authenticateToken, checkUserExist, checkFamilyExist, a
             return;
         }
 
-        const increaseFamily = await col_accounts.updateOne(query, {$inc: {messageCount: 1}});
-        if (increaseFamily.modifiedCount !== 1) {
+        const increaseMessage = await col_accounts.updateOne(query, {$inc: {messageCount: 1}});
+        if (increaseMessage.modifiedCount !== 1) {
             res.sendStatus(404);
             return;
         }
 
         res.sendStatus(200);
-        console.log("successfully added member to family for " + req.user.username);
+        console.log("successfully added Message for user  " + req.user.username);
 
     }catch(Error) {
         // console.log("Family member doesn't exist")
-        console.log("Problem Adding Member");
-        res.status(500).send("Member Addition Unsuccessful");
+        console.log("Problem Adding Message");
+        res.status(500).send("Message Addition Unsuccessful");
     }
 })
 

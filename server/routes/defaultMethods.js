@@ -25,21 +25,21 @@ async function checkUserExist(req, res, next) {
 
 
 /************** Checks if the added individual already exists in our array ************/
-async function checkFamilyExist(req, res, next) {
+async function checkMessageExist(req, res, next) {
     const db = await connectToDatabase();
     const col_accounts = db.collection('Accounts');
 
     const query = {
         "username": req.user.username,
-        "Family": {
-            $elemMatch: { name: req.body.name }
+        "Messages": {
+            $elemMatch: { name: req.body.title }
         }
     };
 
     const exist = await col_accounts.findOne(query);
 
     if (exist) {
-        console.log("This individual already exists in the User's Family");
+        console.log("This message already exists");
         return res.sendStatus(403);
     } else {
         next();
@@ -93,4 +93,4 @@ function genToken(req) {
     return newToken;
 }
 
-module.exports = {checkUserExist, checkFamilyExist, authenticateToken, genToken};
+module.exports = {checkUserExist, checkMessageExist, authenticateToken, genToken};

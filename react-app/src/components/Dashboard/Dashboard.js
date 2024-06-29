@@ -1,8 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import UserCard from "./UserProfile";
 import FamilyBoard from "./FamilyBoard";
 import "../css/Dashboard/Dashboard.css";
+import { addCard, removeCard } from "./UpdateDashFuncs";
+
+// the context we will use to re-render/fetch from any child component
+const DataContext = createContext();
 
 function Dashboard() {
     const [data, setData] = useState(null);
@@ -56,8 +60,26 @@ function Dashboard() {
         return <div>Loading...</div>;
     }
 
+    const fetchNewData = async (type, info) => {
+        if (type === "add") {
+            // info here is the form data / message we're adding
+            const newData = await addCard(data, info);
+            await setData(newData);
+
+
+        } else if (type === "remove") {
+            // info here is the title of the message we're removing
+            const newData = await removeCard(data, info);
+            await setData(newData);
+        }
+
+        // const result = await getData();
+        // const userInfo = await result.userInfo; // Ensure result.userInfo is fetched correctly
+        // setData(userInfo);
+    }
+
     return (
-        <>
+        <DataContext.Provider value={fetchNewData}>
             <div className="Dashboard-Div col">
                 <div className="Dashboard-Containers row-1">
                     <UserCard cardData={data} cardNav={navigate}/>
@@ -66,8 +88,9 @@ function Dashboard() {
                     <FamilyBoard cardData={data}/>
                 </div>
             </div>
-        </>
+        </DataContext.Provider>
     )
 }
 
 export default Dashboard;
+export { DataContext };

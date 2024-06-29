@@ -12,8 +12,6 @@ function FamilyBoard(props) {
         if (myData) {
             setCardCount(myData.messageCount);
             setFamilyData(myData.Messages);
-            console.log("my messages count: " + cardCount);
-            console.log(myData.Messages)
         }
     }, [props.cardData]); // React to changes in props.cardData
 
@@ -23,8 +21,8 @@ function FamilyBoard(props) {
             <div className="UserCard-Container-Div">
 
                 <div className="UserCard-Container-Div2 col">
-                    {familyData.map((member) => <MessageCard setFamilyData={setFamilyData} familyData={familyData} key={member.name} memberData={member}/>)}
-                    {(cardCount < 20) ? <AddCard setFamilyData={setFamilyData} familyData={familyData}/> : <></>}
+                    {familyData.map((message) => <MessageCard familyData={familyData} key={message.message} memberData={message}/>)}
+                    {(cardCount < 20) ? <AddCard familyData={familyData}/> : <></>}
                 </div>
 
             </div>

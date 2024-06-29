@@ -1,8 +1,10 @@
 import '../../css/Dashboard/Modal.css';
 import ModalBody from './ModalBody';
+import { useContext } from 'react';
+import { DataContext } from '../Dashboard';
 
 function AddMemberModal(props) {
-    // this will decide whether we're on first modal - which adds member - or seconds modal, which adds its messages
+    const addData = useContext(DataContext);
 
     const saveMember = async (e) => {
         e.preventDefault();
@@ -24,6 +26,12 @@ function AddMemberModal(props) {
             },
             body: JSON.stringify(object)
         })
+
+        if (addMemberResponse.ok) {
+            e.target.reset();
+            addData("add", object);
+            props.toggleModal();
+        }
     }
 
     return (

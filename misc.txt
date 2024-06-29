@@ -12,3 +12,6 @@ mongod --config ./server/mongodMain.conf and press enter. 4) After this, a pleth
 then the terminal will be in a loop. 5) Once this occurs, open up a new ps terminal and type the following command to enter the 
 database: mongosh --port 230 . Upon submission, you will be able to connect to the database. As a starter, the syntax for accessing a 
 database on the server is: use <<database id>>.
+
+Inefficencies with code:
+- Front-end code fetches the updated data from the server every time the user adds/deletes/edits messages rather than updating front-end async. based on response type

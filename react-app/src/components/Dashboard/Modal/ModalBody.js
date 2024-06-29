@@ -20,9 +20,9 @@ function ModalBody() {
     return(
         <>
         <div className="modal-body">
-            <input name="name" maxLength="20" placeholder="Full Name" type="text" required/>
+            <input name="title" maxLength="50" placeholder="Title [Describe Message]" type="text" required/>
 
-            <input name="name" maxLength="50" placeholder="Message Description" type="text" required/>
+            <input name="name" maxLength="20" placeholder="Full Name" type="text" required/>
 
             {/*************** Div That Contains the Radio Boxes ****************/}
             <label className="radioHeading">Select how you want the message to be sent: </label>

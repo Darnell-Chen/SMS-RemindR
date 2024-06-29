@@ -50,8 +50,8 @@ function Login(props) {
         <>
             <h2>Login</h2>
             <form className="loginForm" onSubmit={onLogin}>
-                <input name="email" placeholder="Email" type="text"/>
-                <input name="password" placeholder="Password" type="text"/>
+                <input name="email" placeholder="Email" type="text" required/>
+                <input name="password" placeholder="Password" type="password" required/>
 
                 {(props.displayedMsg) ? <p className='login-register-msg'>{props.displayedMsg}</p> : <></>}
 
