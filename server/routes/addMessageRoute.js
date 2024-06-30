@@ -7,7 +7,6 @@ const router = express.Router();
 router.use(express.json())//<-- this is required for sending data from backend to frontend and vice versa
 
 const {checkUserExist, checkMessageExist, authenticateToken, genToken} = require("./defaultMethods");
-const storeMessages = require ("./messageManagement/storeMessages"); 
 
 
 /**************************** Route for Getting User Data *******************************/
