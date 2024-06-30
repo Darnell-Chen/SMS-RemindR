@@ -9,6 +9,7 @@ NodeJS
 
 or just "npm install" since it's all in package.json
 
+
 [*]Notes from Meeting 1
 
 Idea: Chore Web App
