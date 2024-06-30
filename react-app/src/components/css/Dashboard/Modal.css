@@ -32,12 +32,33 @@
 
 /********** Styling for Both Modal Bodies (Go lower for individual bodies) ************/
 .modal input {
-    border: none;
+    border-radius: 5px;
+
+    background-color: transparent;
+}
+
+.dateTimePicker {
+    overflow: visible;
+}
+
+/****** This specific class is just used to mimic the same look as mui's date-time picker******/
+.needBorder {
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    background-color: transparent;
+    padding: 10px;
+}
+
+.needBorder:hover:not(:focus) {
+    border: 1px solid black;
+}
+
+.needBorder:focus {
+    outline:1px solid blue;
 }
 
 .modal textarea {
     width: 100%;
-    border: none;
+    border-radius: 5px;
 }
 
 /**** This is the Header that says 'Add Messages' or 'Add Member' ****/
@@ -93,12 +114,14 @@
 .select-week label {
     display: inline-block;
     text-align: center;
-    border: 2px solid white;
+    border: 1px solid rgba(0, 0, 0, 0.25);
     cursor: pointer;
     width: 14.2856%;
     height: 100%;
-    padding: 3px 0px 3px 0px;
+    padding: 5px 0px 5px 0px;
+    border-radius: 5px;
     margin-bottom: 5px;
+    margin-top: 10px;
 }
   
 #mon:checked ~ label[for="mon"],

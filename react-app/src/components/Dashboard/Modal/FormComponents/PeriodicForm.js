@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import dayjs, { Dayjs } from 'dayjs';
+
 
 function PeriodicForm() {
+    let currDate = new Date();
 
     return (
         <>
@@ -22,7 +27,9 @@ function PeriodicForm() {
                 <label htmlFor="sun">Sun</label>
             </div>
 
-            <input name="time" type="time" required/>
+            <DemoContainer components={['TimePicker']}>
+                <TimePicker className="timePicker" name="time" defaultValue={dayjs(currDate)} slotProps={{textField: {required: true,},}}/>
+            </DemoContainer>
         </>
     );
 }

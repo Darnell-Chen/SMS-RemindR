@@ -20,8 +20,6 @@ router.delete("/deleteMember", authenticateToken, checkUserExist, async (req, re
             }
         };
 
-        console.log(filter)
-
         // this will specifiy that we want to pull array objects in 'Family' where the name matches the one the user inputted
         const update = {
             $pull: { 
@@ -30,8 +28,6 @@ router.delete("/deleteMember", authenticateToken, checkUserExist, async (req, re
                 }
             }
         };
-
-        console.log(update);
 
         const removeMember = await col_accounts.updateOne(filter, update);
 

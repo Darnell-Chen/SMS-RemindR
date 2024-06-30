@@ -16,6 +16,16 @@ function AddMemberModal(props) {
         for (let [key, value] of newForm.entries()) {
             object[key] = value;
         }
+
+        // basic check to see if the user has an input for any of the days of the week
+        // the other input types already have a required attribute
+        if ((object.freqType == "periodic") && !(object.mon || object.tue || object.wed || object.thu || object.fri || object.fri || object.sat || object.sun )){
+            return;
+        }
+
+        // this adds a string timezone, which works 95% of the time - use a select input if you want a more accurate timezone input from user
+        // https://stackoverflow.com/questions/1091372/getting-the-clients-time-zone-and-offset-in-javascript
+        object["timezone"] = Intl.DateTimeFormat().resolvedOptions().timeZone;
         
         const addMemberResponse = await fetch('http://127.0.0.1:3001/addMember', {
             method: 'POST',

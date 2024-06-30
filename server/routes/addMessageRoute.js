@@ -7,6 +7,7 @@ const router = express.Router();
 router.use(express.json())//<-- this is required for sending data from backend to frontend and vice versa
 
 const {checkUserExist, checkMessageExist, authenticateToken, genToken} = require("./defaultMethods");
+const storeMessages = require ("./messageManagement/storeMessages"); 
 
 
 /**************************** Route for Getting User Data *******************************/
@@ -51,7 +52,7 @@ router.post("/addMember", authenticateToken, checkUserExist, checkMessageExist, 
 
         console.log(req.body);
 
-        // this will update the array with the new member
+        // this will update/push the array with the new message
         const result = await col_accounts.updateOne(query, {$push: { Messages: req.body}});
 
 

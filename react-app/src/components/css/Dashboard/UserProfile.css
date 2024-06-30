@@ -12,6 +12,16 @@
     box-shadow: 2px 2px 25px var(--baseGreen2);
 }
 
+#currentMessageCount {
+    justify-content: center;
+    text-align: center;
+}
+
+#currentMessageCount span{
+    font-style: italic;
+}
+
+
 .logoutDiv {
     display: flex;
     align-items: center;
@@ -38,10 +48,26 @@
     .logoutDiv button{
         width: 50%;
     }
+
+    #currentMessageCount {
+        justify-content: center;
+        text-align: left;
+    }
+    
   }
 
 @media all and (min-width: 768px) {
     .logoutDiv {
         justify-content: flex-end;
+    }
+
+    .User-Info-Div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #currentMessageCount span{
+        font-style: italic;
     }
 }
