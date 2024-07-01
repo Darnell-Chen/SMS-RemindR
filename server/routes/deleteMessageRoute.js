@@ -33,7 +33,6 @@ router.delete("/deleteMember", authenticateToken, checkUserExist, async (req, re
 
         
         if (removeMember.modifiedCount == 1) {
-            await col_accounts.updateOne({username: req.user.username}, {$inc: {messageCount: -1}})
             res.sendStatus(200);
         } else {
             res.sendStatus(450);

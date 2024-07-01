@@ -10,7 +10,7 @@ function OnceForm() {
     return (
         <>
             <DemoContainer components={['DateTimePicker']}>
-                <DateTimePicker className="dateTimePicker" name="datetime" defaultValue={dayjs(currDate)} slotProps={{textField: {required: true,},}}/>
+                <DateTimePicker className="dateTimePicker" ampm={false} name="datetime" defaultValue={dayjs(currDate)} slotProps={{textField: {required: true,},}}/>
             </DemoContainer>
         </>
     );

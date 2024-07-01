@@ -9,6 +9,7 @@ const deleteMessageRoute = require('./routes/deleteMessageRoute');
 const json = require('body-parser/lib/types/json');
 // ^^ Note by Ardoine: I wanna delete this b/c its better if its
 // in the indexRoutes.js file instead.
+const scheduleMessages = require("./messageScheduler");
 
 const connectToDatabase = require('./db');
 
@@ -44,3 +45,5 @@ app.listen(port, () => {
 app.use(indexRoutes);
 app.use(addMessageRoute);
 app.use(deleteMessageRoute);
+
+scheduleMessages();

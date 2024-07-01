@@ -69,8 +69,7 @@ router.post("/register", async (req, res) => {
         telephone: telephone,
         first_name: fname,
         last_name: lname,
-        Family: [],
-        familyCount: 0
+        Messages: [],
         
         // Replicate JSON object with the 
         // JSON data representing the account.
@@ -79,7 +78,6 @@ router.post("/register", async (req, res) => {
     const draft1_db = await connectToDatabase();
     coll_accounts = draft1_db.collection('Accounts');
 
-    arrOfAccounts = draft1_db.collection('Accounts').find();//<-- Returns all of the 
     // accounts from the account collection from database.
     try {
         const count = await coll_accounts.countDocuments(newUser);

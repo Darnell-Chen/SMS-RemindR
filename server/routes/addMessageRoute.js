@@ -61,12 +61,6 @@ router.post("/addMember", authenticateToken, checkUserExist, checkMessageExist, 
             return;
         }
 
-        const increaseMessage = await col_accounts.updateOne(query, {$inc: {messageCount: 1}});
-        if (increaseMessage.modifiedCount !== 1) {
-            res.sendStatus(404);
-            return;
-        }
-
         res.sendStatus(200);
         console.log("successfully added Message for user  " + req.user.username);
 

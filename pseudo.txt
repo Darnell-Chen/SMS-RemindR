@@ -1,0 +1,13 @@
+const sendMessages = () => {
+
+    1. access MongoDB
+    const db = await connectToDatabase();
+
+    2. connect to Accounts collection
+
+    3. loop through every user document and access their Messages array
+
+    4. If size of array > 0, then we'll use node-scheduler to schedule the message
+
+}
+

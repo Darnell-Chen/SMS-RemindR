@@ -28,7 +28,7 @@ function PeriodicForm() {
             </div>
 
             <DemoContainer components={['TimePicker']}>
-                <TimePicker className="timePicker" name="time" defaultValue={dayjs(currDate)} slotProps={{textField: {required: true,},}}/>
+                <TimePicker className="timePicker" name="time" ampm={false} defaultValue={dayjs(currDate)} slotProps={{textField: {required: true,},}}/>
             </DemoContainer>
         </>
     );
