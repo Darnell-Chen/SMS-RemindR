@@ -8,6 +8,8 @@ router.use(express.json())//<-- this is required for sending data from backend t
 
 const {checkUserExist, checkMessageExist, authenticateToken, genToken} = require("./defaultMethods");
 
+const {addMessage: addMessage} = require("../messageScheduler");
+
 
 /**************************** Route for Getting User Data *******************************/
 
@@ -20,6 +22,9 @@ router.get("/getData", authenticateToken, checkUserExist, async (req, res) => {
         if (!userInfo) {
             throw new Error("Error fetching user data from MongoDB");
         }
+
+        // make sure we don't return the password by accident;
+        delete userInfo.password;
         
         res.status(200).json({
             authToken: genToken(req),
@@ -60,6 +65,8 @@ router.post("/addMember", authenticateToken, checkUserExist, checkMessageExist, 
             res.sendStatus(404);
             return;
         }
+
+        addMessage(req);
 
         res.sendStatus(200);
         console.log("successfully added Message for user  " + req.user.username);

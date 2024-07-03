@@ -7,6 +7,7 @@ const router = express.Router();
 router.use(express.json())//<-- this is required for sending data from backend to frontend and vice versa
 
 const {checkUserExist, checkMessageExist, authenticateToken, genToken} = require("./defaultMethods");
+const {removeMessage: removeMessage} = require("../messageScheduler");
 
 router.delete("/deleteMember", authenticateToken, checkUserExist, async (req, res) => {
     const db = await connectToDatabase();
@@ -33,6 +34,7 @@ router.delete("/deleteMember", authenticateToken, checkUserExist, async (req, re
 
         
         if (removeMember.modifiedCount == 1) {
+            removeMessage(req)
             res.sendStatus(200);
         } else {
             res.sendStatus(450);

@@ -140,3 +140,8 @@
     width: 100%;
     height: 2px;
 }
+
+.modalWarnings {
+    color: red;
+    margin-left: 20px;
+}

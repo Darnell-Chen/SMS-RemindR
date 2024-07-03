@@ -1,10 +1,13 @@
+body {
+    overflow-x: hidden;
+}
+
 .body-root {
     overflow-x: hidden;
 }
 
 .Dashboard-Div {
     box-sizing: border-box;
-    overflow: hidden;
     width: 100vw;
     margin: 0px;
     padding: 10px;
@@ -22,7 +25,6 @@
 .User-Profile-Div {
     max-height: 90vh;
     box-sizing: border-box;
-    overflow: hidden;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     padding: 10px;
@@ -66,7 +68,7 @@
 /******** How scrollbar looks ********/
 
 ::-webkit-scrollbar {
-    width: 20px;
+    width: 0px;
 }
 
 ::-webkit-scrollbar-thumb {

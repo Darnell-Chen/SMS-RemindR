@@ -32,7 +32,7 @@ async function checkMessageExist(req, res, next) {
     const query = {
         "username": req.user.username,
         "Messages": {
-            $elemMatch: { name: req.body.title }
+            $elemMatch: { title: req.body.title }
         }
     };
 
@@ -59,14 +59,14 @@ function authenticateToken(req, res, next) {
 
     if (token == null) {
         console.log("TOKEN IS NULL - check if token has bearer");
-        return res.sendStatus(403);
+        return res.sendStatus(401);
     }
 
     // user here is the user/email object we passed in loginOperation()
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
         if (err) {
             console.log("ERROR IN VERTIFICATION");
-            return res.sendStatus(403);
+            return res.sendStatus(401);
         }
 
         // attaches user to the request so we can grab the user data

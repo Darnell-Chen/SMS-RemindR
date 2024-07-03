@@ -27,6 +27,10 @@ function Home() {
                     </div>
                 </section>
             </div>
+
+            <div className="footer">
+
+            </div>
         </React.Fragment>
     )
 }

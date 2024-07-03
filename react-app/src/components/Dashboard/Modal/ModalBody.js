@@ -43,9 +43,11 @@ function ModalBody() {
                 </div>
             </div>
 
-            {(contactType === "phone") ? <input className="needBorder" name="phone" placeholder="Phone" type="tele" minLength={10} maxlength={10} required/> : null}
+            {(contactType === "phone") ? <input className="needBorder" name="phone" placeholder="Phone" type="text" pattern="[0-9]{10,10}" required/> : null}
             {(contactType === "email") ? <input className="needBorder" name="email" placeholder="Email" type="email" maxLength={30} required/> : null}
-            {(contactType === "discord") ? <input className="needBorder" name="discord" placeholder="Discord Username" type="text" maxLength={25} required/> : null}
+
+            {/********** Discord UID is min length 17 and max length 18 *********/}
+            {(contactType === "discord") ? <input className="needBorder" name="discord" placeholder="Discord UID (NOT USERNAME)" type="text" pattern="[0-9]{17,18}" title="Note: This isn't a valid UID" required/> : null}
 
 
             <textarea className="needBorder" name="message" maxLength="150" type="text" placeholder="Your Message <150 characters" required/>
@@ -53,12 +55,12 @@ function ModalBody() {
             <label className="radioHeading">Select how frequently the message should be sent: </label>
             <div className="frequencyDiv">
                 <div>
-                    <input className="needBorder" type="radio" checked={freqType==="periodic" ? "true" : null} onClick={() => {changeFreqType("periodic")}} name="freqType" value="periodic" required/>
+                    <input className="needBorder" type="radio" checked={freqType==="periodic" ? "true" : undefined} onClick={() => {changeFreqType("periodic")}} name="freqType" value="periodic" required/>
                     <label>&nbsp; Periodic</label>
                 </div>
 
                 <div>
-                    <input className="needBorder" type="radio" checked={freqType==="once" ? "true" : null} onClick={() => {changeFreqType("once")}} name="freqType" value="once" required/>
+                    <input className="needBorder" type="radio" checked={freqType==="once" ? "true" : undefined} onClick={() => {changeFreqType("once")}} name="freqType" value="once" required/>
                     <label>&nbsp; Single-Use</label>
                 </div>
             </div>

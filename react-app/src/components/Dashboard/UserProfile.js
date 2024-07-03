@@ -21,7 +21,7 @@ function UserProfile(props) {
                 </div>
 
                 <div className="User-Info-Div col-md-4">
-                    <h6 id="currentMessageCount">{"You currently have: " + props.cardData.messageCount + (props.cardData.messageCount != 1 ? " active Messages" : " active Message")} <span> (Max 35) </span></h6>
+                    <h6 id="currentMessageCount">{"You currently have: " + props.cardData.Messages.length + (props.cardData.Messages.length != 1 ? " active Messages" : " active Message")} <span> (Max 35) </span></h6>
                 </div>
 
                 <div className="logoutDiv col-md-4">

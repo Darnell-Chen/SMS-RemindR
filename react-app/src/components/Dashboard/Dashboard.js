@@ -79,7 +79,7 @@ function Dashboard() {
     }
 
     return (
-        <DataContext.Provider value={fetchNewData}>
+        <DataContext.Provider value={{'fetchNewData': fetchNewData, 'data': data}}>
             <div className="Dashboard-Div col">
                 <div className="Dashboard-Containers row-1">
                     <UserCard cardData={data} cardNav={navigate}/>

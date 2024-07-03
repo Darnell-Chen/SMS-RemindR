@@ -1,13 +1,22 @@
 import '../../css/Dashboard/Modal.css';
 import ModalBody from './ModalBody';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Dashboard';
 
 function AddMemberModal(props) {
-    const addData = useContext(DataContext);
+    const navigate = useNavigate();
+    const [warnings, setWarnings] = useState(null);
+    
+    // fetchNewData is used for both removing and adding data, hence the name
+    const {fetchNewData: addData, data} = useContext(DataContext);
 
     const saveMember = async (e) => {
         e.preventDefault();
+
+        if (warnings != null) {
+            setWarnings(null);
+        }
 
         // we'll store the form data here
         const object = {};
@@ -17,9 +26,19 @@ function AddMemberModal(props) {
             object[key] = value;
         }
 
+        const allMessages = data.Messages;
+        for (let i = 0; i < Object.keys(allMessages).length; i++) {
+            if (allMessages[i].title == object.title) {
+                setWarnings("This title is already being used by another message");
+                return;
+            }
+        }
+
+
         // basic check to see if the user has an input for any of the days of the week
         // the other input types already have a required attribute
         if ((object.freqType == "periodic") && !(object.mon || object.tue || object.wed || object.thu || object.fri || object.fri || object.sat || object.sun )){
+            setWarnings("Please select atleast 1 day of the week");
             return;
         }
 
@@ -42,6 +61,10 @@ function AddMemberModal(props) {
             addData("add", object);
             props.toggleModal();
         }
+
+        if (addMemberResponse.status === 401) {
+            navigate("/");
+        }
     }
 
     return (
@@ -60,6 +83,8 @@ function AddMemberModal(props) {
 
                             {/*** This is the body that contains the actual form***/}
                             <ModalBody />
+
+                            {(warnings) ? <p className='modalWarnings'>{warnings}</p> : null}
 
                             <div className="modal-footer">
                                 <button onClick={() => props.toggleModal()} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

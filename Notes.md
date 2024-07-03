@@ -5,8 +5,6 @@ NodeJS
 
 ```npm install express cors mongodb nodemon```
 
-***nodemon is used to run server after ctrl + s
-
 or just "npm install" since it's all in package.json
 
 

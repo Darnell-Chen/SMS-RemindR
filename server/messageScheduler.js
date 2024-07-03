@@ -1,6 +1,8 @@
 const schedule = require('node-schedule');
 const connectToDatabase = require("./db");
 
+const {sendDiscordMessage: sendDiscordMessage} = require("./discord");
+
 let scheduleMap = {};
 
 const scheduleMessages = async () => {
@@ -11,7 +13,7 @@ const scheduleMessages = async () => {
     // https://www.geeksforgeeks.org/how-to-query-for-documents-where-array-size-is-greater-than-1-in-mongodb/
     const all_documents = await collection.find({$expr:{$gt:[{$size:{$ifNull:["$Messages",[]]}},0]}});
 
-    // we map use a dict to map 'username + title' to schedule
+    // we map use a dict to map 'username + title' to a scheduled job
     for await (const doc of all_documents) {
         const currMessages = doc.Messages;
         for (let i = 0; i < currMessages.length; i++) {
@@ -30,7 +32,7 @@ const scheduleMessages = async () => {
         }
     }
 
-    console.log(scheduleMap)
+    console.log("Length of Dict: " + Object.keys(scheduleMap).length)
 }
 
 function schedulePeriodic(key, messageObject) {
@@ -54,7 +56,8 @@ function schedulePeriodic(key, messageObject) {
     rule.minute = Number(hour_minute_split[1]);
 
     const job = schedule.scheduleJob(rule, () => {
-        console.log(messageObject.message);
+        sendMessage(messageObject);
+        delete scheduleMap[key];
     });
 
     // cautionary check in case a form is retrieved where no days were selected
@@ -64,28 +67,62 @@ function schedulePeriodic(key, messageObject) {
 }
 
 
-
-
 function scheduleOnce(key, messageObject) {
     const date = new Date(messageObject.datetime);
 
     // returns null if the datetime is from the past/already past
     const job = schedule.scheduleJob(date, () => {
-        console.log('The world is going to end today.');
+        sendMessage(messageObject);
     });
 
+    // validates that the job was actually scheduled before adding to dictionary
     if (job) {
         scheduleMap[key] = job;
     }
 }
 
+function sendMessage(messageObject){
+    const contactType = messageObject.contactType;
 
-async function removeMessage(messageObject) {
-
+    if (contactType === 'discord') {
+        sendDiscordMessage(messageObject.discord, messageObject.message);
+    }
 }
 
-async function addMessage(messageObject) {
 
+function removeMessage(messageObject) {
+    // make sure to cancel the job first before removing from list
+    const key = messageObject.user.username + " " + messageObject.body.title;
+
+    // this just checks that the message could potentially be in our dict before searching
+    if (messageObject.body.freqType == 'once') {
+        const currDate = Date.now();
+        const messageDate = new Date(messageObject.body.datetime);
+        const dateDiff = messageDate - currDate;
+
+        if (dateDiff < 0) {
+            return;
+        }
+    }
+
+    try {
+        scheduleMap[key].cancel();
+        delete scheduleMap[key];
+
+    } catch (e) {
+        console.log("Trying to remove message with key: " + key + " but couldn't be done.");
+    }
 }
 
-module.exports = scheduleMessages;
+// messageObject is just the default req that is sent to the route handler
+function addMessage(messageObject) {
+    const key = messageObject.user.username + " " + messageObject.body.title;
+
+    if (messageObject.body.freqType == "periodic") {
+        schedulePeriodic(key, messageObject.body);
+    } else if (messageObject.body.freqType == "once") {
+        scheduleOnce(key, messageObject.body);
+    }
+}
+
+module.exports = {scheduleMessages, removeMessage, addMessage};

@@ -29,8 +29,6 @@ function Login(props) {
                 // generally, it's advised to store refreshToken in http-only cookie, but this is just for a small project
                 localStorage.setItem("authToken", authToken);
     
-                console.log("successful");
-    
                 navigate("/dashboard");
 
             } else {
@@ -56,9 +54,6 @@ function Login(props) {
                 {(props.displayedMsg) ? <p className='login-register-msg'>{props.displayedMsg}</p> : <></>}
 
                 <div className="login-options-div">
-                    <div>
-                        <a href="#" className="loginOptions">Forgot Password?</a>
-                    </div>
                     <div>
                         <a href="#" className="loginOptions" onClick={() => changeForm(props)}>Register Here</a>
                     </div>

@@ -3,15 +3,18 @@ require('dotenv').config();
 const express = require('express') 
 const bodyParser = require('body-parser');
 const cors = require('cors') 
+
 const indexRoutes = require('./routes/indexRoutes');
 const addMessageRoute = require('./routes/addMessageRoute');
 const deleteMessageRoute = require('./routes/deleteMessageRoute');
+
 const json = require('body-parser/lib/types/json');
 // ^^ Note by Ardoine: I wanna delete this b/c its better if its
 // in the indexRoutes.js file instead.
-const scheduleMessages = require("./messageScheduler");
 
+const {scheduleMessages: scheduleMessages} = require("./messageScheduler");
 const connectToDatabase = require('./db');
+const {client: discordClient} = require('./discord');
 
 const hostname = '127.0.0.1';
 const port = 3001;
@@ -40,10 +43,11 @@ app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
+
+scheduleMessages();
+
 // this is the routes for all fetch requests from the index page (from front-end)
 // as well as all fetch requests from dashboard
 app.use(indexRoutes);
 app.use(addMessageRoute);
 app.use(deleteMessageRoute);
-
-scheduleMessages();
