@@ -86,9 +86,20 @@ function sendMessage(messageObject){
 
     if (contactType === 'discord') {
         sendDiscordMessage(messageObject.discord, messageObject.message);
+    } else if(contactType === 'phone') {
+        sendSMSMessage(messageObject);
     }
 }
+function sendSMSMessage(messageObject) {
+    const receiverNum = `+${18036862426}`;
+    client.messages.create( {
+        body: messageObject.message,
+        from: `+${+18555241702/*Here, I will insert the phone number of requester here*/}`,
+        to: `+${receiverNum/*Here, I will insert the phone number of the account receiving message here*/}`
+    }).then(message => console.log(message.sid)).done();
+    // QUESTION #1: Should we store the message sent somewhere after it is sent via sms?
 
+}
 
 function removeMessage(messageObject) {
     // make sure to cancel the job first before removing from list
