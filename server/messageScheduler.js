@@ -3,6 +3,12 @@ const connectToDatabase = require("./db");
 
 const {sendDiscordMessage: sendDiscordMessage} = require("./discord");
 
+const twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+
+const sendgrid_api = require('@sendgrid/mail')
+sendgrid_api.setApiKey(process.env.SENDGRID_API_KEY);
+
+
 let scheduleMap = {};
 
 const scheduleMessages = async () => {
@@ -34,6 +40,14 @@ const scheduleMessages = async () => {
 
     console.log("Length of Dict: " + Object.keys(scheduleMap).length)
 }
+
+
+
+
+
+
+
+
 
 function schedulePeriodic(key, messageObject) {
 
@@ -81,6 +95,14 @@ function scheduleOnce(key, messageObject) {
     }
 }
 
+
+
+
+
+
+
+
+
 function sendMessage(messageObject){
     const contactType = messageObject.contactType;
 
@@ -88,18 +110,69 @@ function sendMessage(messageObject){
         sendDiscordMessage(messageObject.discord, messageObject.message);
     } else if(contactType === 'phone') {
         sendSMSMessage(messageObject);
+    } else if (contactType === 'email') {
+        sendEmailMessage(messageObject);
     }
 }
-function sendSMSMessage(messageObject) {
-    const receiverNum = `+${18036862426}`;
-    client.messages.create( {
-        body: messageObject.message,
-        from: `+${+18555241702/*Here, I will insert the phone number of requester here*/}`,
-        to: `+${receiverNum/*Here, I will insert the phone number of the account receiving message here*/}`
-    }).then(message => console.log(message.sid)).done();
-    // QUESTION #1: Should we store the message sent somewhere after it is sent via sms?
 
+
+function sendSMSMessage(messageObject) {
+    if (process.env.HAVE_TWILIO != 'true') {
+        return;
+    }
+
+    // NOTE: UNLESS IF YOU HAVE PAID FOR A TWILIO NUMBER, THIS WILL NOT WORK.
+    try {
+        const receiverNum = '+1' + messageObject.phone;
+
+        twilio.messages.create( {
+            body: messageObject.message,
+            from: process.env.TWILIO_FROM_NUMBER,
+            to: receiverNum
+        }).then(message => console.log(message.sid)).done();
+
+
+    } catch {
+        console.log("Failed to deliver message via number");
+        console.log(messageObject);
+    }
 }
+
+function sendEmailMessage(messageObject) {
+    const msg = {
+        to: messageObject.email,
+        from: process.env.SENDGRID_FROM_EMAIL,
+        subject: "Reminder from SMS_RemindR",
+        text: messageObject.message
+    }
+
+    try {
+        sendgrid_api
+        .send(msg)
+        .then((response) => {
+        console.log(response[0].statusCode)
+        console.log(response[0].headers)
+        })
+        .catch((error) => {
+        console.error(error)
+        })
+
+    } catch {
+        console.log("Unable to send email");
+    } 
+}
+
+
+
+
+
+
+
+
+
+
+
+// ************************ Add and remove messages dynamically from dict ****************************
 
 function removeMessage(messageObject) {
     // make sure to cancel the job first before removing from list
@@ -124,6 +197,7 @@ function removeMessage(messageObject) {
         console.log("Trying to remove message with key: " + key + " but couldn't be done.");
     }
 }
+
 
 // messageObject is just the default req that is sent to the route handler
 function addMessage(messageObject) {
