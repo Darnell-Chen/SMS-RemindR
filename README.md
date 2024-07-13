@@ -53,13 +53,10 @@ SENDGRID_API_KEY = SG.abcabc1234567890abcabc
 ```
 
 3. In order to use the Discord bot, you will need to have a Discord account or create one. You can then create a Discord bot to recieve a Discord Token. Documentation from [DiscordJS](https://discord.js.org/) can help you get started.
-<br>
 
 You will also need to create a [Twilio](https://www.twilio.com/en-us) and [SendGrid](https://sendgrid.com/en-us) account in order to use the SMS and Email features. 
 
 Twilio is a *paid* service, meaning you will need to buy a number in order to send messages to others. On the other hand, SendGrid allows 100 free emails per day on the Free Tier.
-
-<br>
 
 If you do not plan on using twilio, set `HAVE_TWILIO = false`. If you do, then set the value to `true`.
 
